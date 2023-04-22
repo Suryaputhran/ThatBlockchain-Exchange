@@ -27,17 +27,18 @@ This project is licensed under the MIT License - see the LICENSE.md file for det
   
 The following packages are used in this project:
 
-@reduxjs/toolkit: This package provides a set of opinionated tools for efficient Redux development. To install, run npm install @reduxjs/toolkit.
-axios: This is a popular promise-based HTTP client for Node.js and browser. To install, run npm install axios.
-dotenv: This package loads environment variables from a .env file into process.env. To install, run npm install dotenv.
-ethereumjs-tx: This package provides a simple way to create, sign, and serialize Ethereum transactions. To install, run npm install ethereumjs-tx.
-hardhat: This is a development environment for building, testing, and deploying smart contracts on Ethereum. To install, run npm install hardhat.
-react: This is a JavaScript library for building user interfaces. To install, run npm install react.
-react-dom: This package provides DOM-specific methods that can be used at the top level of your React application. To install, run npm install react-dom.
-react-redux: This package provides React bindings for Redux. To install, run npm install react-redux.
-react-router-dom: This package provides DOM bindings for React Router. To install, run npm install react-router-dom.
-redux: This is a predictable state container for JavaScript apps. To install, run npm install redux.
-web3: This is the Ethereum JavaScript API, which allows you to interact with an Ethereum blockchain node using JavaScript. To install, run npm install web3.
+- @reduxjs/toolkit: This package provides a set of opinionated tools for efficient Redux development. To install, run npm install @reduxjs/toolkit.
+- axios: This is a popular promise-based HTTP client for Node.js and browser. To install, run npm install axios.
+- dotenv: This package loads environment variables from a .env file into process.env. To install, run npm install dotenv.
+- ethereumjs-tx: This package provides a simple way to create, sign, and serialize Ethereum transactions. To install, run npm install ethereumjs-tx.
+- hardhat: This is a development environment for building, testing, and deploying smart contracts on Ethereum. To install, run npm install hardhat.
+- react: This is a JavaScript library for building user interfaces. To install, run npm install react.
+- react-dom: This package provides DOM-specific methods that can be used at the top level of your React application. To install, run npm install react-dom.
+- react-redux: This package provides React bindings for Redux. To install, run npm install react-redux.
+- react-router-dom: This package provides DOM bindings for React Router. To install, run npm install react-router-dom.
+- redux: This is a predictable state container for JavaScript apps. To install, run npm install redux.
+- web3: This is the Ethereum JavaScript API, which allows you to interact with an Ethereum blockchain node using JavaScript. To install, run npm install web3.
+
 You can install all these packages at once by running npm install.
 
 **Support**
