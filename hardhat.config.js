@@ -1,5 +1,7 @@
 require("@nomicfoundation/hardhat-toolbox");
+var task = require("hardhat/config").task;
 require("dotenv").config({ path: ".env" });
+
 /** @type import('hardhat/config').HardhatUserConfig */
 
 task("accounts", "Prints the list of accounts", async (taskArgs, hre) => {
