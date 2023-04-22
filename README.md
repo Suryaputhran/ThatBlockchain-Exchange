@@ -1,7 +1,9 @@
 **Decentralized Exchange (Dex)**
+
 This is a decentralized exchange project built on the Ethereum blockchain platform using the Hardhat framework, React, and Redux.
 
 **Getting Started**
+
 To get started with this project, follow these steps:
 
 1. Clone the repository: git clone https://github.com/exyreams/Decentralized-Exchange.git
@@ -12,14 +14,17 @@ To get started with this project, follow these steps:
 
 
 **Usage**
+  
 Once you have the application running, you can interact with the decentralized exchange through the web interface or by executing trades directly on the Ethereum blockchain.
 
 Contributions are welcome! If you would like to contribute to this project, please submit a pull request or contact the project maintainer.
 
 **License**
+ 
 This project is licensed under the MIT License - see the LICENSE.md file for details.
 
 **Packages**
+  
 The following packages are used in this project:
 
 @reduxjs/toolkit: This package provides a set of opinionated tools for efficient Redux development. To install, run npm install @reduxjs/toolkit.
@@ -35,7 +40,8 @@ redux: This is a predictable state container for JavaScript apps. To install, ru
 web3: This is the Ethereum JavaScript API, which allows you to interact with an Ethereum blockchain node using JavaScript. To install, run npm install web3.
 You can install all these packages at once by running npm install.
 
-Support
+**Support**
+  
 If you have any questions or encounter any issues with the application, please refer to the documentation in the docs directory or contact the project maintainer.
 
 Thank you for your time, and if you have any suggestions on how we can improve this project, please let us know!
