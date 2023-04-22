@@ -33,7 +33,6 @@ contract Token {
         require(_to != address(0), "Error: Transfer cannot be made to the null address.");
         balanceOf[_from] = balanceOf[_from] - _value;
         balanceOf[_to] = balanceOf[_to] + _value;
-
         emit Transfer(_from, _to, _value);
     }
 
@@ -47,12 +46,8 @@ contract Token {
     function transferFrom(address _from, address _to, uint256 _value) public returns(bool success){
         require(_value <= balanceOf[_from],"Error: Insufficient balance.");
         require(_value <= allowance[_from][msg.sender], "Error: Transfer amount exceeds approved allowance.");
-
         allowance[_from][msg.sender] = allowance[_from][msg.sender] - _value;
-
         _transfer(_from, _to, _value);
-
         return true;
     }
-
 }
