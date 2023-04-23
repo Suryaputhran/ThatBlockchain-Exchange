@@ -14,5 +14,10 @@ contract DecentralizedExchange {
         feePercent = _feePercent;
     }
 
+    function depositToken(address _token, uint256 _amount) public {
+        //transfer tokens to exchange
+        //update user balance
+        //emit an event
+    }
 
 }
