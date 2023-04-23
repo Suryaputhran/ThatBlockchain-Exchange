@@ -13,18 +13,20 @@ contract DecentralizedExchange {
     event Deposit(address token, address user, uint256 amount, uint256 balance);
     event Withdraw(address token, address user, uint256 amount, uint256 balance);
     event Order(uint256 id, address user, address tokenGet, uint256 amountGet, address tokenGive, uint256 amountGive, uint256 timestamp);
+    event Cancel(uint256 id, address user, address tokenGet, uint256 amountGet, address tokenGive, uint256 amountGive, uint256 timestamp);
 
     mapping(address => mapping(address => uint256)) public tokens;
     mapping(uint256 => _Order) public orders;
+    mapping(uint256 => bool) public orderCancelled;
 
     struct _Order{
-        uint256 id; //unique identifier for order
+        uint256 id;
         address user;
-        address tokenGet; //user who made order
-        uint256 amountGet; // add of the token they receive
-        address tokenGive; // address of token they give
-        uint256 amountGive; //amount they give
-        uint256 timestamp; //when order was created
+        address tokenGet;
+        uint256 amountGet;
+        address tokenGive;
+        uint256 amountGive;
+        uint256 timestamp;
     }
 
     constructor(address _feeAccount, uint256 _feePercent) {
@@ -58,14 +60,21 @@ contract DecentralizedExchange {
         orderCount = orderCount + 1;
         orders[orderCount] = _Order(
             orderCount,
-            msg.sender, //user
-            _tokenGet, //tokenGet
-            _amountGet, //amountGet
-            _tokenGive, //tokenGive
-            _amountGive, // amountGive
+            msg.sender,
+            _tokenGet,
+            _amountGet,
+            _tokenGive,
+            _amountGive,
             block.timestamp
         );
-
         emit Order(orderCount, msg.sender, _tokenGet, _amountGet, _tokenGive, _amountGive, block.timestamp );
+    }
+
+    function cancelOrder(uint256 _id) public{
+        _Order storage _order = orders[_id];
+        require(address(_order.user) == msg.sender, "Access Denied: You are not authorized to cancel this order");
+        require(_order.id == _id,"Error: Invalid order ID. The provided ID does not match the order's ID.");
+        orderCancelled[_id] = true;
+        emit Cancel(_order.id, msg.sender, _order.tokenGet, _order.amountGet, _order.tokenGive, _order.amountGive, block.timestamp );
     }
 }
