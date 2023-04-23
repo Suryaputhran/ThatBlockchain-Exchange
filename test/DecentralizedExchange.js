@@ -1,7 +1,7 @@
-const { ethers } = require("hardhat");
-const { expect } = require("chai");
+const {ethers} = require("hardhat");
+const {expect} = require("chai");
 const tokens = (n) => {
-    return ethers.utils.parseUnits(n.toString(),"ether")
+    return ethers.utils.parseUnits(n.toString(), "ether")
 }
 describe("Decentralized Exchange", () => {
 
@@ -13,8 +13,8 @@ describe("Decentralized Exchange", () => {
         const DecentralizedExchange = await ethers.getContractFactory("DecentralizedExchange")
         const Token = await ethers.getContractFactory("Token")
 
-        token1 = await Token.deploy("Fenix","FNX", 18, "1000000")
-        token2 = await Token.deploy("Auriga","AUG", 18, "1000000")
+        token1 = await Token.deploy("Fenix", "FNX", 18, "1000000")
+        token2 = await Token.deploy("Auriga", "AUG", 18, "1000000")
 
         accounts = await ethers.getSigners()
         deployer = accounts[0]
@@ -283,13 +283,13 @@ describe("Decentralized Exchange", () => {
                 })
 
                 it("Executes the trade and charge fees.", async () => {
-                   expect(await decentralizedexchange.balanceOf(token1.address, user1.address)).to.equal(tokens(0))
-                   expect(await decentralizedexchange.balanceOf(token1.address, user2.address)).to.equal(tokens(1))
-                   expect(await decentralizedexchange.balanceOf(token1.address, feeAccount.address)).to.equal(tokens(0))
+                    expect(await decentralizedexchange.balanceOf(token1.address, user1.address)).to.equal(tokens(0))
+                    expect(await decentralizedexchange.balanceOf(token1.address, user2.address)).to.equal(tokens(1))
+                    expect(await decentralizedexchange.balanceOf(token1.address, feeAccount.address)).to.equal(tokens(0))
 
-                   expect(await decentralizedexchange.balanceOf(token2.address, user1.address)).to.equal(tokens(1))
-                   expect(await decentralizedexchange.balanceOf(token2.address, user2.address)).to.equal(tokens(0.9))
-                   expect(await decentralizedexchange.balanceOf(token2.address, feeAccount.address)).to.equal(tokens(0.1))
+                    expect(await decentralizedexchange.balanceOf(token2.address, user1.address)).to.equal(tokens(1))
+                    expect(await decentralizedexchange.balanceOf(token2.address, user2.address)).to.equal(tokens(0.9))
+                    expect(await decentralizedexchange.balanceOf(token2.address, feeAccount.address)).to.equal(tokens(0.1))
                 })
 
                 it("Updates filled orders.", async () => {
@@ -315,8 +315,8 @@ describe("Decentralized Exchange", () => {
             describe("Failure", () => {
 
                 it("Rejects invalid Order IDs", async () => {
-                  const invalidOrderId = 99999
-                  await expect(decentralizedexchange.connect(user2).fillOrder(invalidOrderId)).to.be.reverted
+                    const invalidOrderId = 99999
+                    await expect(decentralizedexchange.connect(user2).fillOrder(invalidOrderId)).to.be.reverted
                 })
 
                 it("Rejects already filled Orders.", async () => {
