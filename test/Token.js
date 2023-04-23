@@ -85,8 +85,6 @@ describe("Token", () => {
                 await expect(token.connect(deployer).transfer('0x0000000000000000000000000000000000000000', amount)).to.be.reverted
             })
         })
-
-
     })
 
     describe("Approving Tokens", () => {

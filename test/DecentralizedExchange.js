@@ -5,7 +5,7 @@ const tokens = (n) => {
 }
 describe("Decentralized Exchange", () => {
 
-    let deployer, feeAccount, decentralizedexchange
+    let deployer, feeAccount, decentralizedexchange, token1, user1, accounts
 
     const feePercent = 10
 
@@ -43,7 +43,6 @@ describe("Decentralized Exchange", () => {
         let transaction, result
         let amount = tokens(10)
 
-
         describe("Success", () => {
 
             beforeEach(async () => {
@@ -78,6 +77,71 @@ describe("Decentralized Exchange", () => {
                 // Don't approve any tokens before depositing
                 await expect(decentralizedexchange.connect(user1).depositToken(token1.address, amount)).to.be.reverted
             })
+        })
+    })
+
+    describe("Withdrawing Tokens", () => {
+
+        let transaction, result
+        let amount = tokens(10)
+
+        describe("Success", () => {
+
+            beforeEach(async () => {
+                //Approve Tokens
+                transaction = await token1.connect(user1).approve(decentralizedexchange.address, amount)
+                result = await transaction.wait()
+                //Deposit Tokens
+                transaction = await decentralizedexchange.connect(user1).depositToken(token1.address, amount)
+                result = await transaction.wait()
+                //Withdraw Tokens
+                transaction = await decentralizedexchange.connect(user1).withdrawToken(token1.address, amount)
+                result = await transaction.wait()
+            })
+
+            it("Withdraws token funds.", async () => {
+                expect(await token1.balanceOf(decentralizedexchange.address)).to.equal(0)
+                expect(await decentralizedexchange.tokens(token1.address, user1.address)).to.equal(0)
+                expect(await decentralizedexchange.balanceOf(token1.address, user1.address)).to.equal(0)
+
+            })
+
+            it("Emits a Withdraw event.", async () => {
+                const event = result.events[1] // because more than one event are emitted.
+                expect(event.event).to.equal("Withdraw")
+
+                const args = event.args
+                expect(args.token).to.equal(token1.address)
+                expect(args.user).to.equal(user1.address)
+                expect(args.amount).to.equal(amount)
+                expect(args.balance).to.equal(0)
+            })
+        })
+
+        describe("Failure", () => {
+            it("Fails for insufficient funds.", async () => {
+                // Don't approve any tokens before depositing
+                await expect(decentralizedexchange.connect(user1).withdrawToken(token1.address, amount)).to.be.reverted
+            })
+        })
+    })
+
+    describe("Checking Balances", () => {
+
+        let transaction, result
+        let amount = tokens(10)
+
+        beforeEach(async () => {
+            //Approve Tokens
+            transaction = await token1.connect(user1).approve(decentralizedexchange.address, amount)
+            result = await transaction.wait()
+            //Deposit Tokens
+            transaction = await decentralizedexchange.connect(user1).depositToken(token1.address, amount)
+            result = await transaction.wait()
+        })
+
+        it("Returns user balance.", async () => {
+            expect(await decentralizedexchange.balanceOf(token1.address, user1.address)).to.equal(amount)
 
         })
     })
