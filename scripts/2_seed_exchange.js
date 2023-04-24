@@ -7,6 +7,7 @@ const wait = (seconds) => {
     const milliseconds = seconds * 1000
     return new Promise(resolve => setTimeout(resolve, milliseconds))
 }
+
 async function main() {
 
     // Fetch accounts from wallet - these are unlocked
@@ -78,7 +79,7 @@ async function main() {
     transaction = await decentralizedexchange.connect(user1).makeOrder(Finix.address, tokens(10), Auriga.address, tokens(55))
     await transaction.wait()
     console.log(`Made Order from ${user1.address}`)
-    
+
     //Cancel Orders
     //user1 cancels order
     orderId = result.events[0].args.orderId
@@ -131,7 +132,7 @@ async function main() {
     //Seed open orders
 
     //user1 makes orders
-    for(let i = 1; i <= 10; i++){
+    for (let i = 1; i <= 10; i++) {
         transaction = await decentralizedexchange.connect(user1).makeorder(Finix.address, tokens(10 * i), Auriga.address, tokens(20))
         result = await transaction.wait()
         console.log(`Made Order from ${user1.address}`)
@@ -139,7 +140,7 @@ async function main() {
         await wait(1)
     }
 
-    for(let i = 1; i <= 10; i++){
+    for (let i = 1; i <= 10; i++) {
         transaction = await decentralizedexchange.connect(user2).makeorder(Auriga.address, tokens(10), Finix.address, tokens(20 * i))
         result = await transaction.wait()
         console.log(`Made Order from ${user2.address}`)
