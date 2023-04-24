@@ -23,6 +23,7 @@ contract Token {
         balanceOf[msg.sender] = totalSupply;
     }
 
+
     function transfer(address _to, uint256 _value) public returns(bool success){
         require(balanceOf[msg.sender] >= _value, "Error: Insufficient balance to complete the transfer.");
         _transfer(msg.sender, _to, _value);
