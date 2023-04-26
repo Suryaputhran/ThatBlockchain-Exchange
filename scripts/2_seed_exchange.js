@@ -1,6 +1,8 @@
 // noinspection JSUnusedAssignment
+/* eslint-disable no-undef */
 
-const { ethers } = require("hardhat");
+const config = require('../src/config.json')
+
 const tokens = (n) => {
     return ethers.utils.parseUnits(n.toString(), "ether")
 }
@@ -15,30 +17,34 @@ async function main() {
     // Fetch accounts from wallet - these are unlocked
     const accounts = await ethers.getSigners()
 
+    //Fetch networks
+    const { chainId } = await ethers.provider.getNetwork()
+    console.log("using chainId:", chainId)
+
     // Fetch the deployed contract or tokens
-    const Finix = await ethers.getContractAt("Token", "0x610178dA211FEF7D417bC0e6FeD39F05609AD788")
+    const Finix = await ethers.getContractAt("Token", config[chainId].Finix.address )
     console.log(`Finix fetched: ${Finix.address}`)
-
-    const Auriga = await ethers.getContractAt("Token", "0x2279B7A0a67DB372996a5FaB50D91eAA73d2eBe6")
+    
+    const Auriga = await ethers.getContractAt("Token", config[chainId].Auriga.address)
     console.log(`Auriga fetched: ${Auriga.address}`)
-
-    const Empyrean = await ethers.getContractAt("Token", "0x8A791620dd6260079BF849Dc5567aDC3F2FdC318")
+    
+    const Empyrean = await ethers.getContractAt("Token", config[chainId].Empyrean.address)
     console.log(`Empyrean fetched: ${Empyrean.address}`)
-
-    const Helix = await ethers.getContractAt("Token", "0xB7f8BC63BbcaD18155201308C8f3540b07f84F5e")
+    
+    const Helix = await ethers.getContractAt("Token", config[chainId].Helix.address)
     console.log(`Helix fetched: ${Helix.address}`)
 
-    const Quantum = await ethers.getContractAt("Token", "0xA51c1fc2f0D1a1b8494Ed1FE312d7C3a78Ed91C0")
+    const Quantum = await ethers.getContractAt("Token", config[chainId].Quantum.address)
     console.log(`Quantum fetched: ${Quantum.address}`)
 
-    const Sirius = await ethers.getContractAt("Token", "0x0DCd1Bf9A1b36cE34237eEaFef220932846BCD82")
+    const Sirius = await ethers.getContractAt("Token", config[chainId].Sirius.address)
     console.log(`Sirius fetched: ${Sirius.address}`)
 
-    const Zeroconium = await ethers.getContractAt("Token", "0x9A676e781A523b5d0C0e43731313A708CB607508")
+    const Zeroconium = await ethers.getContractAt("Token", config[chainId].Zeroconium.address)
     console.log(`Zeroconium fetched: ${Zeroconium.address}`)
 
     //Fetch the deployed DecentralizedExchange
-    const decentralizedexchange = await ethers.getContractAt("DecentralizedExchange", "0x0B306BF915C4d645ff596e518fAf3F9669b97016")
+    const decentralizedexchange = await ethers.getContractAt("DecentralizedExchange", config[chainId].decentralizedexchange.address)
     console.log(`Decentralized Exchange fetched: ${decentralizedexchange.address}\n`)
 
     //Give tokens to account
@@ -68,7 +74,6 @@ async function main() {
     //user1 transfers 10,000 Zeroconium
     transaction = await Zeroconium.connect(sender).transfer(receiver.address, amount)
     console.log(`Transferred ${amount} tokens from ${sender.address} to ${receiver.address}\n`)
-
 
     //Set up exchange users
     const user1 = accounts[0]
