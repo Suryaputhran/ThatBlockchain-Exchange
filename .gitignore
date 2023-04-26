@@ -7,7 +7,7 @@
 
 # testing
 /coverage
-
+orders.js
 # production
 /build
 
