@@ -1,3 +1,5 @@
+// noinspection JSUnusedAssignment
+
 const { ethers } = require("hardhat");
 const tokens = (n) => {
     return ethers.utils.parseUnits(n.toString(), "ether")
@@ -14,29 +16,29 @@ async function main() {
     const accounts = await ethers.getSigners()
 
     // Fetch the deployed contract or tokens
-    const Finix = await ethers.getContractAt("Token", "0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0")
+    const Finix = await ethers.getContractAt("Token", "0x610178dA211FEF7D417bC0e6FeD39F05609AD788")
     console.log(`Finix fetched: ${Finix.address}`)
 
-    const Auriga = await ethers.getContractAt("Token", "0x5FbDB2315678afecb367f032d93F642f64180aa3")
+    const Auriga = await ethers.getContractAt("Token", "0x2279B7A0a67DB372996a5FaB50D91eAA73d2eBe6")
     console.log(`Auriga fetched: ${Auriga.address}`)
 
-    const Empyrean = await ethers.getContractAt("Token", "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512")
+    const Empyrean = await ethers.getContractAt("Token", "0x8A791620dd6260079BF849Dc5567aDC3F2FdC318")
     console.log(`Empyrean fetched: ${Empyrean.address}`)
 
-    const Helix = await ethers.getContractAt("Token", "0xCf7Ed3AccA5a467e9e704C703E8D87F634fB0Fc9")
+    const Helix = await ethers.getContractAt("Token", "0xB7f8BC63BbcaD18155201308C8f3540b07f84F5e")
     console.log(`Helix fetched: ${Helix.address}`)
 
-    const Quantum = await ethers.getContractAt("Token", "0xDc64a140Aa3E981100a9becA4E685f962f0cF6C9")
+    const Quantum = await ethers.getContractAt("Token", "0xA51c1fc2f0D1a1b8494Ed1FE312d7C3a78Ed91C0")
     console.log(`Quantum fetched: ${Quantum.address}`)
 
-    const Sirius = await ethers.getContractAt("Token", "0x5FC8d32690cc91D4c39d9d3abcBD16989F875707")
+    const Sirius = await ethers.getContractAt("Token", "0x0DCd1Bf9A1b36cE34237eEaFef220932846BCD82")
     console.log(`Sirius fetched: ${Sirius.address}`)
 
-    const Zeroconium = await ethers.getContractAt("Token", "0x0165878A594ca255338adfa4d48449f69242Eb8F")
+    const Zeroconium = await ethers.getContractAt("Token", "0x9A676e781A523b5d0C0e43731313A708CB607508")
     console.log(`Zeroconium fetched: ${Zeroconium.address}`)
 
     //Fetch the deployed DecentralizedExchange
-    const decentralizedexchange = await ethers.getContractAt("DecentralizedExchange", "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853")
+    const decentralizedexchange = await ethers.getContractAt("DecentralizedExchange", "0x0B306BF915C4d645ff596e518fAf3F9669b97016")
     console.log(`Decentralized Exchange fetched: ${decentralizedexchange.address}\n`)
 
     //Give tokens to account
