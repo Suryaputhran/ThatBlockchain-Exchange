@@ -17,10 +17,10 @@ async function main() {
     const Finix = await ethers.getContractAt("Token", "0x0165878A594ca255338adfa4d48449f69242Eb8F")
     console.log(`Token fetched: ${Finix.address}`)
 
-    const Auriga = await ethers.getContractAt("Token", "0xDc64a140Aa3E981100a9becA4E685f962f0cF6C9")
+    const Auriga = await ethers.getContractAt("Token", "0x9A9f2CCfdE556A7E9Ff0848998Aa4a0CFD8863AE")
     console.log(`Token fetched: ${Auriga.address}`)
 
-    const Empyrean = await ethers.getContractAt("Token", "0x5FC8d32690cc91D4c39d9d3abcBD16989F875707")
+    const Empyrean = await ethers.getContractAt("Token", "0x3Aa5ebB10DC797CAC828524e59A333d0A371443c")
     console.log(`Token fetched: ${Empyrean.address}`)
 
     //
@@ -37,7 +37,7 @@ async function main() {
     // console.log(`Token fetched: ${Zeroconium.address}`)
 
     //Fetch the deployed DecentralizedExchange
-    const decentralizedexchange = await ethers.getContractAt("DecentralizedExchange", "0xB7f8BC63BbcaD18155201308C8f3540b07f84F5e")
+    const decentralizedexchange = await ethers.getContractAt("DecentralizedExchange", "0xa85233C63b9Ee964Add6F2cffe00Fd84eb32338f")
     console.log(`Decentralized Exchange fetched: ${decentralizedexchange.address}\n`)
 
     //Give tokens to account[1]
@@ -89,6 +89,7 @@ async function main() {
     //user1 cancels order
     orderId = result.events[0].args.id
     transaction = await decentralizedexchange.connect(user1).cancelOrder(orderId)
+    console.log(result.events);
     result = await transaction.wait()
     console.log(`Cancelled order from ${user1.address}\n`)
 
@@ -100,6 +101,8 @@ async function main() {
     //user1 makes order to get tokens
     transaction = await decentralizedexchange.connect(user1).makeOrder(Auriga.address, tokens(100), Finix.address, tokens(10))
     result = await transaction.wait()
+
+
     console.log(`Made order from ${user1.address}`)
 
     //user2 fills order
