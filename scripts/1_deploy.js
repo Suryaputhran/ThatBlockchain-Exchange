@@ -12,31 +12,31 @@ async function main() {
     console.log(`Accounts fetched:\n${accounts[0].address}\n${accounts[1].address}\n`);
 
     //deploy contract
-    const Auriga = await Token.deploy("Auriga", "AUG", "18", "1000000");
+    const Auriga = await Token.deploy("Auriga", "AUG", "18", "100000000");
     await Auriga.deployed();
     console.log(`Auriga deployed to: ${Auriga.address}`);
 
-    const Empyrean = await Token.deploy("Empyrean", "EMP", "18", "1000000");
+    const Empyrean = await Token.deploy("Empyrean", "EMP", "18", "100000000");
     await Empyrean.deployed();
     console.log(`Empyrean deployed to: ${Empyrean.address}`);
 
-    const Finix = await Token.deploy("Finix", "FNX", "18", "1000000");
+    const Finix = await Token.deploy("Finix", "FNX", "18", "100000000");
     await Finix.deployed();
     console.log(`Finix deployed to: ${Finix.address}`);
 
-    const Helix = await Token.deploy("Helix", "HLX", "18", "1000000");
+    const Helix = await Token.deploy("Helix", "HLX", "18", "100000000");
     await Helix.deployed();
     console.log(`Helix deployed to: ${Helix.address}`);
 
-    const Quantum = await Token.deploy("Quantum", "QTM", "18", "1000000");
+    const Quantum = await Token.deploy("Quantum", "QTM", "18", "100000000");
     await Quantum.deployed();
     console.log(`Quantum deployed to: ${Quantum.address}`);
 
-    const Sirius = await Token.deploy("Sirius", "SRS", "18", "1000000");
+    const Sirius = await Token.deploy("Sirius", "SRS", "18", "100000000");
     await Sirius.deployed();
     console.log(`Sirius deployed to: ${Sirius.address}`);
 
-    const Zeroconium = await Token.deploy("Zeroconium", "ZRC", "18", "1000000");
+    const Zeroconium = await Token.deploy("Zeroconium", "ZRC", "18", "100000000");
     await Zeroconium.deployed();
     console.log(`Zeroconium deployed to: ${Zeroconium.address}`);
 
