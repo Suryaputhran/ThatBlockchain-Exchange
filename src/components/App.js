@@ -7,17 +7,16 @@ import TOKEN_ABI from "../abis/Token.json"
 function App() {
 
     const loadBlockchainData = async () => {
-        //metamask connection
-        const accounts = await window.ethereum.request({ method: "eth_requestAccounts" });
+        const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' })
         console.log(accounts[0])
 
-        //connect ethers to blockchain
-        const provider = new ethers.providers.Web3Provider(window.ethereum);
-        const {chainId} = await provider.getNetwork();
+        // Connect Ethers to blockchain
+        const provider = new ethers.providers.Web3Provider(window.ethereum)
+        const { chainId } = await provider.getNetwork()
         console.log(chainId)
 
-        //Token Smart Contract
-        const token = new ethers.Contract(config[chainId].Fenix.address, TOKEN_ABI, provider)
+        // Token Smart Contract
+        const token = new ethers.Contract(config[chainId].Finix.address, TOKEN_ABI, provider)
         console.log(token.address)
         const symbol = await token.symbol()
         console.log(symbol)
