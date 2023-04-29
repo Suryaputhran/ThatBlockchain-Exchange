@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import config from "../config.json"
 import  { useDispatch } from "react-redux";
-import { loadProvider, loadNetwork, loadAccount, loadToken } from "../store/interactions";
+import { loadProvider, loadNetwork, loadAccount, loadTokens } from "../store/interactions";
 
 function App() {
 
@@ -14,8 +14,21 @@ function App() {
         const chainId = await loadNetwork(provider,dispatch)
 
         // Token Smart Contract
-        await loadToken(provider, config[chainId].Finix.address, dispatch)
+        await loadTokens(provider, [config[chainId].Finix.address, config[chainId].Auriga.address], dispatch)
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     useEffect(() => {
         loadBlockchainData()
