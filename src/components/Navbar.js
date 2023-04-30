@@ -46,7 +46,6 @@ const Navbar = () => {
                         <option value="0xa86a">Avalanche C-Chain</option>
                         <option value="0x440">Metis Andromeda Mainnet</option>
                         <option value="0x38">Binance Smart Chain Mainnet</option>
-                        <option value="0">------------------------------</option>
                         <option value="0xaa36a7">Sepolia</option>
                         <option value="0x5">Goerli</option>
                         <option value="0x2a">Kovan</option>
