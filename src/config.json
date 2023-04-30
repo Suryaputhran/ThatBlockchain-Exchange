@@ -23,6 +23,15 @@
     },
     "Zeroconium": {
       "address": "0x0165878A594ca255338adfa4d48449f69242Eb8F"
-    }
+    },
+    "explorerURL": "#"
+  },
+
+  "11155111" : {
+    "explorerURL": "https://sepolia.etherscan.io/"
+  },
+
+  "42" : {
+    "explorerURL": "https://kovan.etherscan.io/"
   }
 }
