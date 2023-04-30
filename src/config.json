@@ -27,10 +27,42 @@
     "explorerURL": "#"
   },
 
+  "1" : {
+    "explorerURL": "https://etherscan.io/"
+  },
+  "43114" : {
+    "explorerURL": "https://snowtrace.io/"
+  },
+  "56" : {
+    "explorerURL": "https://bscscan.com/"
+  },
+  "250" : {
+    "explorerURL": "https://ftmscan.com/"
+  },
+  "100" : {
+    "explorerURL": "https://gnosisscan.io/"
+  },
+  "1088" : {
+    "explorerURL": "https://andromeda-explorer.metis.io/"
+  },
+  "10" : {
+    "explorerURL": "https://optimistic.etherscan.io/"
+  },
+  "137" : {
+    "explorerURL": "https://polygonscan.com/"
+  },
   "11155111" : {
     "explorerURL": "https://sepolia.etherscan.io/"
   },
-
+  "1101" : {
+    "explorerURL": "https://zkevm.polygonscan.com/"
+  },
+  "4002" : {
+    "explorerURL": "https://testnet.ftmscan.com/"
+  },
+  "5" : {
+    "explorerURL": "https://goerli.etherscan.io/"
+  },
   "42" : {
     "explorerURL": "https://kovan.etherscan.io/"
   }
