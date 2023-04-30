@@ -47,9 +47,9 @@ const Navbar = () => {
                         <option value="0x440">Metis Andromeda Mainnet</option>
                         <option value="0x38">Binance Smart Chain Mainnet</option>
                         <option value="0">------------------------------</option>
+                        <option value="0xaa36a7">Sepolia</option>
                         <option value="0x5">Goerli</option>
                         <option value="0x2a">Kovan</option>
-                        <option value="0xaa36a7">Sepolia</option>
                         <option value="0x44d">Polygon zkEVM</option>
                         <option value="0xfa2">Fantom Testnet</option>
                     </select>
