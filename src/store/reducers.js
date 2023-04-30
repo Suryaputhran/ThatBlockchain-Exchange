@@ -1,21 +1,21 @@
 export const provider = (state = {}, action) => {
     switch (action.type) {
-        case 'PROVIDER_LOADED':
+        case "PROVIDER_LOADED":
             return {
                 ...state,
                 connection: action.connection
             }
-        case 'NETWORK_LOADED':
+        case "NETWORK_LOADED":
             return {
                 ...state,
                 chainId: action.chainId
             }
-        case 'ACCOUNT_LOADED':
+        case "ACCOUNT_LOADED":
             return {
                 ...state,
                 account: action.account
             }
-        case 'ETHER_BALANCE_LOADED':
+        case "ETHER_BALANCE_LOADED":
             return {
                 ...state,
                 balance: action.balance
@@ -34,14 +34,14 @@ const DEFAULT_TOKENS_STATE = {
 
 export const tokens = (state = DEFAULT_TOKENS_STATE, action) => {
     switch (action.type) {
-        case 'TOKEN_1_LOADED':
+        case "TOKEN_1_LOADED":
             return {
                 ...state,
                 loaded: true,
                 contracts: [...state.contracts, action.token],
                 symbols: [...state.symbols, action.symbol]
             }
-        case 'TOKEN_2_LOADED':
+        case "TOKEN_2_LOADED":
             return {
                 ...state,
                 loaded: true,
@@ -56,11 +56,25 @@ export const tokens = (state = DEFAULT_TOKENS_STATE, action) => {
 
 export const exchange = (state = { loaded: false, contract: {} }, action) => {
     switch (action.type) {
-        case 'EXCHANGE_LOADED':
+        case "EXCHANGE_LOADED":
             return {
                 ...state,
                 loaded: true,
                 contract: action.exchange
+            }
+
+        default:
+            return state
+    }
+}
+
+export const decentralizedexchange = (state = { loaded: false, contract: {} }, action) => {
+    switch (action.type) {
+        case "DECENTRALIZEDEXCHANGE_LOADED":
+            return {
+                ...state,
+                loaded: true,
+                contract: action.decentralizedexchange
             }
 
         default:

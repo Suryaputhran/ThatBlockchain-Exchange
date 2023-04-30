@@ -3,11 +3,12 @@ import thunk from "redux-thunk";
 import { composeWithDevTools } from "redux-devtools-extension";
 
 /* Import Reducers */
-import { provider, tokens } from "./reducers"
+import { provider, tokens, decentralizedexchange} from "./reducers"
 
 const reducer = combineReducers({
     provider,
-    tokens
+    tokens,
+    decentralizedexchange
 })
 
 const initialState = {}
