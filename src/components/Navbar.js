@@ -1,7 +1,7 @@
 import { useSelector, useDispatch } from "react-redux"
 import Blockies from "react-blockies"
 import logo from "../assets/logo.png"
-import eth from "../assets/eth.svg"
+import eth from "../assets/eth.png"
 import { loadAccount } from "../store/interactions"
 import config from "../config.json";
 
@@ -39,19 +39,27 @@ const Navbar = () => {
                         <option value="0" disabled>Select Network</option>
                         <option value="0x7A69">Localhost</option>
                         <option value="0x1">Ethereum</option>
-                        <option value="0x64">Gnosis</option>
-                        <option value="0xa">Optimism</option>
-                        <option value="0xfa">Fantom Opera</option>
-                        <option value="0x89">Polygon</option>
+                        <option value="0xa4b1">Arbitrum</option>
                         <option value="0xa86a">Avalanche(C-Chain)</option>
+                        <option value="0x38">Binance SC</option>
+                        <option value="0x2329">Evmos</option>
+                        <option value="0xfa">Fantom Opera</option>
+                        <option value="0x64">Gnosis</option>
+                        <option value="0x1251">IoTeX</option>
                         <option value="0x440">Metis Andromeda</option>
-                        <option value="0x38">Binance Smart Chain</option>
-                        <option value="0" disabled>Test Networks</option>
+                        <option value="0xa">Optimism</option>
+                        <option value="0x89">Polygon</option>
+                        <option value="0x144">zkSync Era</option>
+                        <option value="0" disabled>Testnets</option>
                         <option value="0xaa36a7">Sepolia</option>
                         <option value="0x5">Goerli</option>
+                        <option value="0x61">Binance SC Testnet</option>
+                        <option value="0x2328">Evmos Testnet</option>
+                        <option value="0xfa2">Fantom Testnet</option>
+                        <option value="0x1252">IoTeX Testnet</option>
                         <option value="0x2a">Kovan</option>
                         <option value="0x44d">Polygon zkEVM</option>
-                        <option value="0xfa2">Fantom Testnet</option>
+                        <option value="0x118">zkSync Era Testnet</option>
                     </select>
                 )}
 

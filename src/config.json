@@ -30,11 +30,20 @@
   "1" : {
     "explorerURL": "https://etherscan.io/"
   },
-  "43114" : {
-    "explorerURL": "https://snowtrace.io/"
+  "42161" : {
+    "explorerURL": "https://arbiscan.io/"
+  },
+  "1088" : {
+    "explorerURL": "https://andromeda-explorer.metis.io/"
   },
   "56" : {
     "explorerURL": "https://bscscan.com/"
+  },
+  "43114" : {
+    "explorerURL": "https://snowtrace.io/"
+  },
+  "9001" : {
+    "explorerURL": "https://www.mintscan.io/evmos"
   },
   "250" : {
     "explorerURL": "https://ftmscan.com/"
@@ -42,8 +51,8 @@
   "100" : {
     "explorerURL": "https://gnosisscan.io/"
   },
-  "1088" : {
-    "explorerURL": "https://andromeda-explorer.metis.io/"
+  "4689" : {
+    "explorerURL": "https://iotexscout.io/"
   },
   "10" : {
     "explorerURL": "https://optimistic.etherscan.io/"
@@ -51,8 +60,20 @@
   "137" : {
     "explorerURL": "https://polygonscan.com/"
   },
+  "324" : {
+    "explorerURL": "https://explorer.zksync.io/"
+  },
   "11155111" : {
     "explorerURL": "https://sepolia.etherscan.io/"
+  },
+  "97" : {
+    "explorerURL": "https://testnet.bscscan.com/"
+  },
+  "9000" : {
+    "explorerURL": "https://testnet.mintscan.io/evmos-testnet"
+  },
+  "4690" : {
+    "explorerURL": "https://testnet.iotexscan.io/"
   },
   "1101" : {
     "explorerURL": "https://zkevm.polygonscan.com/"
@@ -65,5 +86,8 @@
   },
   "42" : {
     "explorerURL": "https://kovan.etherscan.io/"
+  },
+  "280" : {
+    "explorerURL": "https://goerli.explorer.zksync.io/"
   }
 }
