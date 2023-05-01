@@ -38,14 +38,15 @@ const Navbar = () => {
                     <select name="networks" id="networks" value={config[chainId] ? `0x${chainId.toString(16)}` : `0`} onChange={networkHandler}>
                         <option value="0" disabled>Select Network</option>
                         <option value="0x7A69">Localhost</option>
-                        <option value="0x1">Ethereum Mainnet</option>
+                        <option value="0x1">Ethereum</option>
                         <option value="0x64">Gnosis</option>
                         <option value="0xa">Optimism</option>
                         <option value="0xfa">Fantom Opera</option>
-                        <option value="0x89">Polygon Mainnet</option>
-                        <option value="0xa86a">Avalanche C-Chain</option>
-                        <option value="0x440">Metis Andromeda Mainnet</option>
-                        <option value="0x38">Binance Smart Chain Mainnet</option>
+                        <option value="0x89">Polygon</option>
+                        <option value="0xa86a">Avalanche(C-Chain)</option>
+                        <option value="0x440">Metis Andromeda</option>
+                        <option value="0x38">Binance Smart Chain</option>
+                        <option value="0" disabled>Test Networks</option>
                         <option value="0xaa36a7">Sepolia</option>
                         <option value="0x5">Goerli</option>
                         <option value="0x2a">Kovan</option>
