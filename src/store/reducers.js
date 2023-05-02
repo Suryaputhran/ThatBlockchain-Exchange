@@ -71,64 +71,109 @@ const DEFAULT_DEX_STATE = {
     events: []
   }
 
-  export const decentralizedexchange = (state = DEFAULT_DEX_STATE, action) => {
+export const decentralizedexchange = (state = DEFAULT_DEX_STATE, action) => {
+    let index, data
+
     switch (action.type) {
-      case "DEX_LOADED":
-        return {
-          ...state,
-          loaded: true,
-          contract: action.decentralizedexchange
-        }
-  
-      // BALANCE CASES
-      case "DEX_TOKEN_1_BALANCE_LOADED":
-        return {
-          ...state,
-          balances: [action.balance]
-        }
-      case "DEX_TOKEN_2_BALANCE_LOADED":
-        return {
-          ...state,
-          balances: [...state.balances, action.balance]
-        }
-  
-      // TRANSFER CASES (DEPOSIT & WITHDRAWS)
-      case "TRANSFER_REQUESTED":
-        return {
-          ...state,
-          transaction: {
-            transactionType: "Transfer",
-            isPending: true,
-            isSuccessful: false
-          },
-          transferInProgress: true
-        }
-      case "TRANSFER_SUCCESSFUL":
-        return {
-          ...state,
-          transaction: {
-            transactionType: "Transfer",
-            isPending: false,
-            isSuccessful: true
-          },
-          transferInProgress: false,
-          events: [action.event, ...state.events]
-        }
-      case "TRANSFER_FAILED":
-        return {
-          ...state,
-          transaction: {
-            transactionType: "Transfer",
-            isPending: false,
-            isSuccessful: false,
-            isError: true
-  
-          },
-          transferInProgress: false
-        }
-  
+        case "DEX_LOADED":
+            return {
+                ...state,
+                loaded: true,
+                contract: action.decentralizedexchange
+            }
+        // BALANCE CASES
+        case "DEX_TOKEN_1_BALANCE_LOADED":
+            return {
+                ...state,
+                balances: [action.balance]
+            }
+        case "DEX_TOKEN_2_BALANCE_LOADED":
+            return {
+                ...state,
+                balances: [...state.balances, action.balance]
+            }
+
+        // TRANSFER CASES (DEPOSIT & WITHDRAWS)
+        case "TRANSFER_REQUESTED":
+            return {
+                ...state,
+                transaction: {
+                    transactionType: "Transfer",
+                    isPending: true,
+                    isSuccessful: false
+                },
+                transferInProgress: true
+            }
+        case "TRANSFER_SUCCESSFUL":
+            return {
+                ...state,
+                transaction: {
+                    transactionType: "Transfer",
+                    isPending: false,
+                    isSuccessful: true
+                },
+                transferInProgress: false,
+                events: [action.event, ...state.events]
+            }
+        case "TRANSFER_FAILED":
+            return {
+                ...state,
+                transaction: {
+                    transactionType: "Transfer",
+                    isPending: false,
+                    isSuccessful: false,
+                    isError: true
+
+                },
+                transferInProgress: false
+            }
+
+        // MAKING ORDERS CASES
+        case "NEW_ORDER_REQUESTED":
+            return {
+                ...state,
+                transaction: {
+                    transactionType: "New Order",
+                    isPending: true,
+                    isSuccessful: false
+                },
+            }
+
+        case "NEW_ORDER_SUCCESSFUL":
+            // Prevent duplicate orders
+            index = state.allOrders.data.findIndex(order => order.id === action.order.id)
+
+            if(index === -1) {
+                data = [...state.allOrders.data, action.order]
+            } else {
+                data = state.allOrders.data
+            }
+
+            return {
+                ...state,
+                allOrders: {
+                    ...state.allOrders,
+                    data
+                },
+                transaction: {
+                    transactionType: "New Order",
+                    isPending: false,
+                    isSuccessful: true
+                },
+                events: [action.event, ...state.events]
+            }
+        case "NEW_ORDER_FAILED":
+            return {
+                ...state,
+                transaction: {
+                    transactionType: "New Order",
+                    isPending: false,
+                    isSuccessful: false,
+                    isError: true
+                },
+            }
+
         default:
-          return state
+            return state
     }
-  }
-  
+}

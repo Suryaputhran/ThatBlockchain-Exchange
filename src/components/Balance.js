@@ -104,7 +104,7 @@ const Balance = () => {
                         id="token0"
                         placeholder="0.0000"
                         value={token1TransferAmount === 0 ? "" : token1TransferAmount}
-                        onChange={(e) => amountHandler(e, tokens[0])} />
+                         onChange={(e) => amountHandler(e, tokens[0])} />
                     <button className="button" type="submit">
                         {isDeposit ? (
                             <span>Deposit</span>

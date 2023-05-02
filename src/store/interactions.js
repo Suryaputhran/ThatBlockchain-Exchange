@@ -59,6 +59,11 @@ export const subscribeToEvents = (decentralizedexchange, dispatch) => {
     decentralizedexchange.on("Withdraw", (token, user, amount, balance, event) => {
         dispatch({ type: "TRANSFER_SUCCESSFUL", event })
     })
+
+     decentralizedexchange.on("Order", (id, user, tokenGet, amountGet, tokenGive, amountGive, timestamp, event) => {
+        const order = event.args
+        dispatch({ type: "NEW_ORDER_SUCCESSFUL", order, event })
+    })
 }
 
 // LOAD USER BALANCES (WALLET & EXCHANGE BALANCES)
@@ -97,5 +102,40 @@ export const transferTokens = async (provider, decentralizedexchange, transferTy
 
     } catch (error) {
         dispatch({ type: "TRANSFER_FAILED" })
+    }
+}
+
+// ORDERS (BUY & SELL)
+export const makeBuyOrder = async (provider, decentralizedexchange, tokens, order, dispatch) => {
+    const tokenGet = tokens[0].address
+    const amountGet = ethers.utils.parseUnits(order.amount, 18)
+    const tokenGive = tokens[1].address
+    const amountGive = ethers.utils.parseUnits((order.amount * order.price).toString(), 18)
+
+    dispatch({ type: "NEW_ORDER_REQUESTED" })
+
+    try {
+        const signer = await provider.getSigner()
+        const transaction = await decentralizedexchange.connect(signer).makeOrder(tokenGet, amountGet, tokenGive, amountGive)
+        await transaction.wait()
+    } catch (error) {
+        dispatch({ type: "NEW_ORDER_FAILED" })
+    }
+}
+
+export const makeSellOrder = async (provider, decentralizedexchange, tokens, order, dispatch) => {
+    const tokenGet = tokens[1].address
+    const amountGet = ethers.utils.parseUnits((order.amount * order.price).toString(), 18)
+    const tokenGive = tokens[0].address
+    const amountGive = ethers.utils.parseUnits(order.amount, 18)
+
+    dispatch({ type: "NEW_ORDER_REQUESTED" })
+
+    try {
+        const signer = await provider.getSigner()
+        const transaction = await decentralizedexchange.connect(signer).makeOrder(tokenGet, amountGet, tokenGive, amountGive)
+        await transaction.wait()
+    } catch (error) {
+        dispatch({ type: "NEW_ORDER_FAILED" })
     }
 }
