@@ -2,8 +2,8 @@ import { useEffect, useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { loadBalances, transferTokens } from "../store/interactions";
 
-import finix from "../assets/finix.png";
-import eth from "../assets/eth.png";
+import maintokens from "../assets/maintokens.png";
+import secondarytokens from "../assets/secondarytokens.png";
 
 const Balance = () => {
 
@@ -92,7 +92,7 @@ const Balance = () => {
 
             <div className="exchange__transfers--form">
                 <div className="flex-between">
-                    <p><small>Token</small><br /><img src={finix} alt="Token Logo" />{symbols && symbols[0]}</p>
+                    <p><small>Token</small><br /><img src={maintokens} alt="Token Logo" />{symbols && symbols[0]}</p>
                     <p><small>Wallet</small><br />{tokenBalances && tokenBalances[0]}</p>
                     <p><small>Exchange</small><br />{decentralizedexchangeBalances && decentralizedexchangeBalances[0]}</p>
                 </div>
@@ -121,7 +121,7 @@ const Balance = () => {
 
             <div className="exchange__transfers--form">
                 <div className="flex-between">
-                    <p><small>Token</small><br /><img src={eth} alt="Token Logo" />{symbols && symbols[1]}</p>
+                    <p><small>Token</small><br /><img src={secondarytokens} alt="Token Logo" />{symbols && symbols[1]}</p>
                     <p><small>Wallet</small><br />{tokenBalances && tokenBalances[1]}</p>
                     <p><small>Exchange</small><br />{decentralizedexchangeBalances && decentralizedexchangeBalances[1]}</p>
                 </div>
