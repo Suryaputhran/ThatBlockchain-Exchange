@@ -55,6 +55,10 @@ export const subscribeToEvents = (decentralizedexchange, dispatch) => {
     decentralizedexchange.on("Deposit", (token, user, amount, balance, event) => {
         dispatch({ type: "TRANSFER_SUCCESSFUL", event })
     })
+
+    decentralizedexchange.on("Withdraw", (token, user, amount, balance, event) => {
+        dispatch({ type: "TRANSFER_SUCCESSFUL", event })
+    })
 }
 
 // LOAD USER BALANCES (WALLET & EXCHANGE BALANCES)
@@ -82,10 +86,13 @@ export const transferTokens = async (provider, decentralizedexchange, transferTy
         const signer = await provider.getSigner()
         const amountToTransfer = ethers.utils.parseUnits(amount.toString(), 18)
 
-        transaction = await token.connect(signer).approve(decentralizedexchange.address, amountToTransfer)
-        await transaction.wait()
-        transaction = await decentralizedexchange.connect(signer).depositToken(token.address, amountToTransfer)
-
+        if (transferType === "Deposit") {
+            transaction = await token.connect(signer).approve(decentralizedexchange.address, amountToTransfer)
+            await transaction.wait()
+            transaction = await decentralizedexchange.connect(signer).depositToken(token.address, amountToTransfer)
+        } else {
+            transaction = await decentralizedexchange.connect(signer).withdrawToken(token.address, amountToTransfer)
+        }
         await transaction.wait()
 
     } catch (error) {
