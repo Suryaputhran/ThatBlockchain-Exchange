@@ -70,7 +70,7 @@ const Markets = () => {
                     <option value={`${config[chainId].Zeroconium.address},${config[chainId].Finix.address}`}>Zeroconium ➞ Finix</option>
                     <option value={`${config[chainId].Zeroconium.address},${config[chainId].Helix.address}`}>Zeroconium ➞ Helix</option>
                     <option value={`${config[chainId].Zeroconium.address},${config[chainId].Sirius.address}`}>Zeroconium ➞ Sirius</option>
-                    <option value={`${config[chainId].Zeroconium.address},${config[chainId].Quantum.address}`}>Zeroconium ➞ Zeroconium</option>
+                    <option value={`${config[chainId].Zeroconium.address},${config[chainId].Quantum.address}`}>Zeroconium ➞ Quantum</option>
                 </select>
             ) : (
                 <div>

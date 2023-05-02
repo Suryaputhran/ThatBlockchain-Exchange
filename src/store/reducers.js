@@ -41,43 +41,95 @@ export const tokens = (state = DEFAULT_TOKENS_STATE, action) => {
                 contracts: [action.token],
                 symbols: [action.symbol]
             }
-        case "TOKEN_2_LOADED":
+        case "TOKEN_1_BALANCE_LOADED":
+            return {
+                ...state,
+                balances: [action.balance]
+            }
+            case "TOKEN_2_LOADED":
             return {
                 ...state,
                 loaded: true,
                 contracts: [...state.contracts, action.token],
                 symbols: [...state.symbols, action.symbol]
             }
-
-        default:
-            return state
-    }
-}
-
-export const exchange = (state = { loaded: false, contract: {} }, action) => {
-    switch (action.type) {
-        case "EXCHANGE_LOADED":
+        case "TOKEN_2_BALANCE_LOADED":
             return {
                 ...state,
-                loaded: true,
-                contract: action.exchange
+                balances: [...state.balances, action.balance]
             }
-
         default:
             return state
     }
 }
 
-export const decentralizedexchange = (state = { loaded: false, contract: {} }, action) => {
+const DEFAULT_EXCHANGE_STATE = {
+    loaded: false,
+    contract: {},
+    transaction: {
+      isSuccessful: false
+    },
+    events: []
+  }
+
+  export const decentralizedexchange = (state = DEFAULT_EXCHANGE_STATE, action) => {
     switch (action.type) {
-        case "DECENTRALIZEDEXCHANGE_LOADED":
-            return {
-                ...state,
-                loaded: true,
-                contract: action.decentralizedexchange
-            }
-
+      case "DECENTRALIZEDEXCHANGE_LOADED":
+        return {
+          ...state,
+          loaded: true,
+          contract: action.decentralizedexchange
+        }
+  
+      // BALANCE CASES
+      case "DECENTRALIZED_EXCHANGE_TOKEN_1_BALANCE_LOADED":
+        return {
+          ...state,
+          balances: [action.balance]
+        }
+      case "DECENTRALIZED_EXCHANGE_TOKEN_2_BALANCE_LOADED":
+        return {
+          ...state,
+          balances: [...state.balances, action.balance]
+        }
+  
+      // TRANSFER CASES (DEPOSIT & WITHDRAWS)
+      case "TRANSFER_REQUEST":
+        return {
+          ...state,
+          transaction: {
+            transactionType: "Transfer",
+            isPending: true,
+            isSuccessful: false
+          },
+          transferInProgress: true
+        }
+      case "TRANSFER_SUCCESS":
+        return {
+          ...state,
+          transaction: {
+            transactionType: "Transfer",
+            isPending: false,
+            isSuccessful: true
+          },
+          transferInProgress: false,
+          events: [action.event, ...state.events]
+        }
+      case "TRANSFER_FAILED":
+        return {
+          ...state,
+          transaction: {
+            transactionType: "Transfer",
+            isPending: false,
+            isSuccessful: false,
+            isError: true
+  
+          },
+          transferInProgress: false
+        }
+  
         default:
-            return state
+          return state
     }
-}
+  }
+  
