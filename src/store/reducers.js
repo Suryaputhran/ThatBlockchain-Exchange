@@ -20,7 +20,6 @@ export const provider = (state = {}, action) => {
                 ...state,
                 balance: action.balance
             }
-
         default:
             return state
     }
@@ -63,7 +62,7 @@ export const tokens = (state = DEFAULT_TOKENS_STATE, action) => {
     }
 }
 
-const DEFAULT_EXCHANGE_STATE = {
+const DEFAULT_DEX_STATE = {
     loaded: false,
     contract: {},
     transaction: {
@@ -72,9 +71,9 @@ const DEFAULT_EXCHANGE_STATE = {
     events: []
   }
 
-  export const decentralizedexchange = (state = DEFAULT_EXCHANGE_STATE, action) => {
+  export const decentralizedexchange = (state = DEFAULT_DEX_STATE, action) => {
     switch (action.type) {
-      case "DECENTRALIZEDEXCHANGE_LOADED":
+      case "DEX_LOADED":
         return {
           ...state,
           loaded: true,
@@ -82,19 +81,19 @@ const DEFAULT_EXCHANGE_STATE = {
         }
   
       // BALANCE CASES
-      case "DECENTRALIZED_EXCHANGE_TOKEN_1_BALANCE_LOADED":
+      case "DEX_TOKEN_1_BALANCE_LOADED":
         return {
           ...state,
           balances: [action.balance]
         }
-      case "DECENTRALIZED_EXCHANGE_TOKEN_2_BALANCE_LOADED":
+      case "DEX_TOKEN_2_BALANCE_LOADED":
         return {
           ...state,
           balances: [...state.balances, action.balance]
         }
   
       // TRANSFER CASES (DEPOSIT & WITHDRAWS)
-      case "TRANSFER_REQUEST":
+      case "TRANSFER_REQUESTED":
         return {
           ...state,
           transaction: {
@@ -104,7 +103,7 @@ const DEFAULT_EXCHANGE_STATE = {
           },
           transferInProgress: true
         }
-      case "TRANSFER_SUCCESS":
+      case "TRANSFER_SUCCESSFUL":
         return {
           ...state,
           transaction: {

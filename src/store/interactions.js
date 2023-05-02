@@ -46,7 +46,7 @@ export const loadTokens = async (provider, addresses, dispatch) => {
 
 export const loadExchange = async (provider, address, dispatch) => {
     const decentralizedexchange = new ethers.Contract(address, EXCHANGE_ABI, provider);
-    dispatch({ type: "EXCHANGE_LOADED", decentralizedexchange })
+    dispatch({ type: "DEX_LOADED", decentralizedexchange })
 
     return decentralizedexchange
 }
@@ -63,20 +63,20 @@ export const loadBalances = async (decentralizedexchange, tokens, account, dispa
     dispatch({ type: "TOKEN_1_BALANCE_LOADED", balance })
 
     balance = ethers.utils.formatUnits(await decentralizedexchange.balanceOf(tokens[0].address, account), 18)
-    dispatch({ type: "DECENTRALIZED_EXCHANGE_TOKEN_1_BALANCE_LOADED", balance })
+    dispatch({ type: "DEX_TOKEN_1_BALANCE_LOADED", balance })
 
     balance = ethers.utils.formatUnits(await tokens[1].balanceOf(account), 18)
     dispatch({ type: "TOKEN_2_BALANCE_LOADED", balance })
 
     balance = ethers.utils.formatUnits(await decentralizedexchange.balanceOf(tokens[1].address, account), 18)
-    dispatch({ type: "DECENTRALIZED_EXCHANGE_TOKEN_2_BALANCE_LOADED", balance })
+    dispatch({ type: "DEX_TOKEN_2_BALANCE_LOADED", balance })
 }
 
 // TRANSFER TOKENS (DEPOSIT & WITHDRAWS)
 export const transferTokens = async (provider, decentralizedexchange, transferType, token, amount, dispatch) => {
     let transaction
 
-    dispatch({ type: "TRANSFER_REQUEST" })
+    dispatch({ type: "TRANSFER_REQUESTED" })
 
     try {
         const signer = await provider.getSigner()
