@@ -123,6 +123,52 @@ export const makeBuyOrder = async (provider, decentralizedexchange, tokens, orde
     }
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 export const makeSellOrder = async (provider, decentralizedexchange, tokens, order, dispatch) => {
     const tokenGet = tokens[1].address
     const amountGet = ethers.utils.parseUnits((order.amount * order.price).toString(), 18)
