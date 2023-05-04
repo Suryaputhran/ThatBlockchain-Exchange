@@ -123,52 +123,6 @@ export const makeBuyOrder = async (provider, decentralizedexchange, tokens, orde
     }
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 export const makeSellOrder = async (provider, decentralizedexchange, tokens, order, dispatch) => {
     const tokenGet = tokens[1].address
     const amountGet = ethers.utils.parseUnits((order.amount * order.price).toString(), 18)
@@ -185,3 +139,41 @@ export const makeSellOrder = async (provider, decentralizedexchange, tokens, ord
         dispatch({ type: "NEW_ORDER_FAILED" })
     }
 }
+
+
+
+
+
+//
+//
+// export const makeSellOrder = async (provider, decentralizedexchange, tokens, order, dispatch) => {
+//     const tokenGet = tokens[1].address
+//     const amountGet = ethers.utils.parseUnits((order.amount * order.price).toString(), 18)
+//     const tokenGive = tokens[0].address
+//     const amountGive = ethers.utils.parseUnits(order.amount, 18)
+//
+//     dispatch({ type: "NEW_ORDER_REQUESTED" })
+//
+//     try {
+//         const signer = await provider.getSigner()
+//         const transaction = await decentralizedexchange.connect(signer).makeOrder(tokenGet, amountGet, tokenGive, amountGive)
+//         await transaction.wait()
+//     } catch (error) {
+//         dispatch({ type: "NEW_ORDER_FAILED" })
+//     }
+// }export const makeSellOrder = async (provider, decentralizedexchange, tokens, order, dispatch) => {
+//     const tokenGet = tokens[1].address
+//     const amountGet = ethers.utils.parseUnits((order.amount * order.price).toString(), 18)
+//     const tokenGive = tokens[0].address
+//     const amountGive = ethers.utils.parseUnits(order.amount, 18)
+//
+//     dispatch({ type: "NEW_ORDER_REQUESTED" })
+//
+//     try {
+//         const signer = await provider.getSigner()
+//         const transaction = await decentralizedexchange.connect(signer).makeOrder(tokenGet, amountGet, tokenGive, amountGive)
+//         await transaction.wait()
+//     } catch (error) {
+//         dispatch({ type: "NEW_ORDER_FAILED" })
+//     }
+// }
