@@ -68,6 +68,10 @@ const DEFAULT_DEX_STATE = {
     transaction: {
       isSuccessful: false
     },
+    allOrders: {
+        loaded: false,
+        data: []
+    },
     events: []
   }
 
@@ -162,6 +166,7 @@ export const decentralizedexchange = (state = DEFAULT_DEX_STATE, action) => {
                 },
                 events: [action.event, ...state.events]
             }
+
         case "NEW_ORDER_FAILED":
             return {
                 ...state,

@@ -13,7 +13,7 @@ describe("Decentralized Exchange", () => {
         const DecentralizedExchange = await ethers.getContractFactory("DecentralizedExchange")
         const Token = await ethers.getContractFactory("Token")
 
-        token1 = await Token.deploy("Fenix", "FNX", 18, "1000000")
+        token1 = await Token.deploy("Finix", "FNX", 18, "1000000")
         token2 = await Token.deploy("Auriga", "AUG", 18, "1000000")
 
         accounts = await ethers.getSigners()

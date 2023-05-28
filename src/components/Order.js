@@ -2,7 +2,6 @@ import { useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux"
 
 import { makeBuyOrder, makeSellOrder } from "../store/interactions"
-
 const Order = () => {
     const [isBuy, setIsBuy] = useState(true)
     const [amount, setAmount] = useState(0)
@@ -28,7 +27,6 @@ const Order = () => {
             setIsBuy(true)
         }
     }
-
     const buyHandler = (e) => {
         e.preventDefault()
         makeBuyOrder(provider, decentralizedexchange, tokens, { amount, price }, dispatch)
@@ -45,7 +43,7 @@ const Order = () => {
 
     return (
         <div className="component exchange__orders">
-            <div className="component__header flex-between">
+            <div className='component__header flex-between'>
                 <h2>New Order</h2>
                 <div className="tabs">
                     <button onClick={tabHandler} ref={buyRef} className="tab tab--active">Buy</button>
@@ -53,7 +51,7 @@ const Order = () => {
                 </div>
             </div>
 
-            <form onSubmit={isBuy ? buyHandler : sellHandler }>
+            <form onSubmit={ isBuy ? buyHandler : sellHandler}>
 
                 {isBuy ? (
                     <label htmlFor="amount">Buy Amount</label>
@@ -66,8 +64,7 @@ const Order = () => {
                     id="amount"
                     placeholder="0.0000"
                     value={amount === 0 ? "" : amount}
-                    onChange={(e) => setAmount(e.target.value)}
-                />
+                    onChange={(e) => setAmount(e.target.value)}/>
 
                 {isBuy ? (
                     <label htmlFor="price">Buy Price</label>
@@ -80,8 +77,7 @@ const Order = () => {
                     id="price"
                     placeholder="0.0000"
                     value={price === 0 ? "" : price}
-                    onChange={(e) => setPrice(e.target.value)}
-                />
+                    onChange={(e) => setPrice(e.target.value)}/>
 
                 <button className="button button--filled" type="submit">
                     {isBuy ? (
