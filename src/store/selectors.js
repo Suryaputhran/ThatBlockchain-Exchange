@@ -8,6 +8,7 @@ const RED = "#F45353"
 
 const account = state => get(state, "provider.account")
 const tokens = state => get(state, "tokens.contracts")
+const events = state => get(state, "decentralizedexchange.events")
 
 const allOrders = state => get(state, "decentralizedexchange.allOrders.data", [])
 const cancelledOrders = state => get(state, "decentralizedexchange.cancelledOrders.data", [])
@@ -25,6 +26,18 @@ const openOrders = state => {
     })
     return openOrders
 }
+
+// MY EVENTS
+
+export const myEventsSelector = createSelector(
+    account,
+    events,
+    (account, events) => {
+        events = events.filter((e) => e.args.user === account)
+        console.log(events)
+        return events
+    }
+)
 
 // MY OPEN ORDERS
 export const myOpenOrdersSelector = createSelector(account, tokens, openOrders, (account, tokens, orders) => {
@@ -257,44 +270,48 @@ const decorateOrderBookOrder = (order, tokens) => {
 
 
 // PRICE CHART
-export const priceChartSelector = createSelector(filledOrders, tokens, (orders, tokens) => {
-    if (!tokens[0] || !tokens[1]) {
-        return
+export const priceChartSelector = createSelector(
+    filledOrders,
+    tokens,
+    (orders, tokens) => {
+        if (!tokens[0] || !tokens[1]) { return }
+
+        // Filter orders by selected tokens
+        orders = orders.filter((o) => o.tokenGet === tokens[0].address || o.tokenGet === tokens[1].address)
+        orders = orders.filter((o) => o.tokenGive === tokens[0].address || o.tokenGive === tokens[1].address)
+
+        // Sort orders by date ascending to compare history
+        orders = orders.sort((a, b) => a.timestamp - b.timestamp)
+
+        // Decorate orders - add display attributes
+        orders = orders.map((o) => decorateOrder(o, tokens))
+
+        // Get last 2 order for final price & price change
+        let secondLastOrder, lastOrder
+        [secondLastOrder, lastOrder] = orders.slice(orders.length - 2, orders.length)
+
+        // get last order price
+        const lastPrice = get(lastOrder, "tokenPrice", 0)
+
+        // get second last order price
+        const secondLastPrice = get(secondLastOrder, "tokenPrice", 0)
+
+        return ({
+            lastPrice,
+            lastPriceChange: (lastPrice >= secondLastPrice ? "+" : "-"),
+            series: [{
+                data: buildGraphData(orders)
+            }]
+        })
+
     }
-
-    // Filter orders by selected tokens
-    orders = orders.filter((o) => o.tokenGet === tokens[0].address || o.tokenGet === tokens[1].address)
-    orders = orders.filter((o) => o.tokenGive === tokens[0].address || o.tokenGive === tokens[1].address)
-
-    // Sort orders by date ascending to compare history
-    orders = orders.sort((a, b) => a.timestamp - b.timestamp)
-
-    // Decorate orders - add display attributes
-    orders = orders.map((o) => decorateOrder(o, tokens))
-
-    // Get last 2 order for final price & price change
-    let secondLastOrder, lastOrder
-    [secondLastOrder, lastOrder] = orders.slice(orders.length - 2, orders.length)
-
-    // get last order price
-    const lastPrice = get(lastOrder, "tokenPrice", 0)
-
-    // get second last order price
-    const secondLastPrice = get(secondLastOrder, "tokenPrice", 0)
-
-    return ({
-        lastPrice, lastPriceChange: (lastPrice >= secondLastPrice ? "+" : "-"), series: [{
-            data: buildGraphData(orders)
-        }]
-    })
-
-})
+)
 
 const buildGraphData = (orders) => {
     // Group the orders by hour for the graph
     orders = groupBy(orders, (o) => moment.unix(o.timestamp).startOf("hour").format())
 
-    // Get Hour detail where data is available.
+    // Get hours data if exists
     const hours = Object.keys(orders)
 
     // Build the graph series
@@ -308,9 +325,11 @@ const buildGraphData = (orders) => {
         const low = minBy(group, "tokenPrice") // low price
         const close = group[group.length - 1] // last order
 
-        return ({
-            x: new Date(hour), y: [open.tokenPrice, high.tokenPrice, low.tokenPrice, close.tokenPrice]
+        return({
+            x: new Date(hour),
+            y: [open.tokenPrice, high.tokenPrice, low.tokenPrice, close.tokenPrice]
         })
     })
+
     return graphData
 }
