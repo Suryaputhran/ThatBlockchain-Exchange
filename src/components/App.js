@@ -1,13 +1,22 @@
-import { useEffect } from "react";
+import {useEffect} from "react";
 import config from "../config.json"
-import  { useDispatch } from "react-redux";
-import { loadProvider, loadNetwork, loadAccount, loadTokens, loadExchange, loadAllOrders, subscribeToEvents} from "../store/interactions";
+import {useDispatch} from "react-redux";
+import {
+    loadAccount,
+    loadAllOrders,
+    loadExchange,
+    loadNetwork,
+    loadProvider,
+    loadTokens,
+    subscribeToEvents
+} from "../store/interactions";
 
 import Order from "./Order";
 import Navbar from "./Navbar";
 import Markets from "./Markets";
 import Balance from "./Balance";
 import OrderBook from "./OrderBook";
+import PriceChart from "./PriceChart";
 
 function App() {
 
@@ -23,14 +32,14 @@ function App() {
 
         // Reload page when network changes
         window.ethereum.on("chainChanged", () => {
-        window.location.reload()
+            window.location.reload()
         })
 
         // Fetch current account & balance from Metamask when changed
         window.ethereum.on("accountsChanged", () => {
-        loadAccount(provider, dispatch)
+            loadAccount(provider, dispatch)
         })
-        
+
         // Load Token Smart Contract
         const Finix = config[chainId].Finix
         const Auriga = config[chainId].Auriga
@@ -69,7 +78,7 @@ function App() {
                 </section>
                 <section className="exchange__section--right grid">
 
-                    {/* PriceChart */}
+                    <PriceChart/>
 
                     {/* Transactions */}
 

@@ -1,8 +1,8 @@
-import { useSelector } from "react-redux"
+import {useSelector} from "react-redux"
 
 // Import Asset & Selectors
 import sort from "../assets/sort.png"
-import { orderBookSelector } from "../store/selectors"
+import {orderBookSelector} from "../store/selectors"
 
 const OrderBook = () => {
     const symbols = useSelector(state => state.tokens.symbols)
@@ -23,18 +23,18 @@ const OrderBook = () => {
                         <caption>Selling</caption>
                         <thead>
                         <tr>
-                            <th>{symbols && symbols[0]}<img src={sort} alt="Sort" /></th>
-                            <th>{symbols && symbols[0]}➞{symbols && symbols[1]}<img src={sort} alt="Sort" /></th>
-                            <th>{symbols && symbols[1]}<img src={sort} alt="Sort" /></th>
+                            <th>{symbols && symbols[0]}<img src={sort} alt="Sort"/></th>
+                            <th>{symbols && symbols[0]}➞{symbols && symbols[1]}<img src={sort} alt="Sort"/></th>
+                            <th>{symbols && symbols[1]}<img src={sort} alt="Sort"/></th>
                         </tr>
                         </thead>
                         <tbody>
                         {/* MAPPING OF SELL ORDERS... */}
                         {orderBook && orderBook.sellOrders.map((order, index) => {
-                            return(
+                            return (
                                 <tr key={index}>
                                     <td>{order.token0Amount}</td>
-                                    <td style={{ color: `${order.orderTypeClass}` }}>{order.tokenPrice}</td>
+                                    <td style={{color: `${order.orderTypeClass}`}}>{order.tokenPrice}</td>
                                     <td>{order.token1Amount}</td>
                                 </tr>
                             )
@@ -52,9 +52,9 @@ const OrderBook = () => {
                         <caption>Buying</caption>
                         <thead>
                         <tr>
-                            <th>{symbols && symbols[0]}<img src={sort} alt="Sort" /></th>
-                            <th>{symbols && symbols[0]}➞{symbols && symbols[1]}<img src={sort} alt="Sort" /></th>
-                            <th>{symbols && symbols[1]}<img src={sort} alt="Sort" /></th>
+                            <th>{symbols && symbols[0]}<img src={sort} alt="Sort"/></th>
+                            <th>{symbols && symbols[0]}➞{symbols && symbols[1]}<img src={sort} alt="Sort"/></th>
+                            <th>{symbols && symbols[1]}<img src={sort} alt="Sort"/></th>
                         </tr>
                         </thead>
                         <tbody>
@@ -65,7 +65,7 @@ const OrderBook = () => {
                             return (
                                 <tr key={index}>
                                     <td>{order.token0Amount}</td>
-                                    <td style={{ color: `${order.orderTypeClass}` }}>{order.tokenPrice}</td>
+                                    <td style={{color: `${order.orderTypeClass}`}}>{order.tokenPrice}</td>
                                     <td>{order.token1Amount}</td>
                                 </tr>
                             )

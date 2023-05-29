@@ -1,31 +1,31 @@
-import { ethers } from "ethers"
+import {ethers} from "ethers"
 import TOKEN_ABI from "../abis/Token.json";
 import EXCHANGE_ABI from "../abis/Exchange.json";
 
 export const loadProvider = (dispatch) => {
     const connection = new ethers.providers.Web3Provider(window.ethereum)
-    dispatch({ type: "PROVIDER_LOADED", connection })
+    dispatch({type: "PROVIDER_LOADED", connection})
 
     return connection
 }
 
 export const loadNetwork = async (provider, dispatch) => {
-    const { chainId } = await provider.getNetwork()
-    dispatch({ type: "NETWORK_LOADED", chainId })
+    const {chainId} = await provider.getNetwork()
+    dispatch({type: "NETWORK_LOADED", chainId})
 
     return chainId
 }
 
 export const loadAccount = async (provider, dispatch) => {
-    const accounts = await window.ethereum.request({ method: "eth_requestAccounts" })
+    const accounts = await window.ethereum.request({method: "eth_requestAccounts"})
     const account = ethers.utils.getAddress(accounts[0])
 
-    dispatch({ type: "ACCOUNT_LOADED", account })
+    dispatch({type: "ACCOUNT_LOADED", account})
 
     let balance = await provider.getBalance(account)
     balance = ethers.utils.formatEther(balance)
 
-    dispatch({ type: "ETHER_BALANCE_LOADED", balance })
+    dispatch({type: "ETHER_BALANCE_LOADED", balance})
 
     return account
 }
@@ -35,50 +35,50 @@ export const loadTokens = async (provider, addresses, dispatch) => {
 
     token = new ethers.Contract(addresses[0], TOKEN_ABI, provider)
     symbol = await token.symbol()
-    dispatch({ type: "TOKEN_1_LOADED", token, symbol })
+    dispatch({type: "TOKEN_1_LOADED", token, symbol})
 
     token = new ethers.Contract(addresses[1], TOKEN_ABI, provider)
     symbol = await token.symbol()
-    dispatch({ type: "TOKEN_2_LOADED", token, symbol })
+    dispatch({type: "TOKEN_2_LOADED", token, symbol})
 
     return token
 }
 
 export const loadExchange = async (provider, address, dispatch) => {
     const decentralizedexchange = new ethers.Contract(address, EXCHANGE_ABI, provider);
-    dispatch({ type: "DEX_LOADED", decentralizedexchange })
+    dispatch({type: "DEX_LOADED", decentralizedexchange})
 
     return decentralizedexchange
 }
 
 export const subscribeToEvents = (decentralizedexchange, dispatch) => {
     decentralizedexchange.on("Deposit", (token, user, amount, balance, event) => {
-        dispatch({ type: "TRANSFER_SUCCESSFUL", event })
+        dispatch({type: "TRANSFER_SUCCESSFUL", event})
     })
 
     decentralizedexchange.on("Withdraw", (token, user, amount, balance, event) => {
-        dispatch({ type: "TRANSFER_SUCCESSFUL", event })
+        dispatch({type: "TRANSFER_SUCCESSFUL", event})
     })
 
-     decentralizedexchange.on("Order", (id, user, tokenGet, amountGet, tokenGive, amountGive, timestamp, event) => {
+    decentralizedexchange.on("Order", (id, user, tokenGet, amountGet, tokenGive, amountGive, timestamp, event) => {
         const order = event.args
-        dispatch({ type: "NEW_ORDER_SUCCESSFUL", order, event })
+        dispatch({type: "NEW_ORDER_SUCCESSFUL", order, event})
     })
 }
 
 // LOAD USER BALANCES (WALLET & EXCHANGE BALANCES)
 export const loadBalances = async (decentralizedexchange, tokens, account, dispatch) => {
     let balance = ethers.utils.formatUnits(await tokens[0].balanceOf(account), 18)
-    dispatch({ type: "TOKEN_1_BALANCE_LOADED", balance })
+    dispatch({type: "TOKEN_1_BALANCE_LOADED", balance})
 
     balance = ethers.utils.formatUnits(await decentralizedexchange.balanceOf(tokens[0].address, account), 18)
-    dispatch({ type: "DEX_TOKEN_1_BALANCE_LOADED", balance })
+    dispatch({type: "DEX_TOKEN_1_BALANCE_LOADED", balance})
 
     balance = ethers.utils.formatUnits(await tokens[1].balanceOf(account), 18)
-    dispatch({ type: "TOKEN_2_BALANCE_LOADED", balance })
+    dispatch({type: "TOKEN_2_BALANCE_LOADED", balance})
 
     balance = ethers.utils.formatUnits(await decentralizedexchange.balanceOf(tokens[1].address, account), 18)
-    dispatch({ type: "DEX_TOKEN_2_BALANCE_LOADED", balance })
+    dispatch({type: "DEX_TOKEN_2_BALANCE_LOADED", balance})
 }
 
 // LOAD ALL ORDERS
@@ -90,26 +90,26 @@ export const loadAllOrders = async (provider, decentralizedexchange, dispatch) =
     const cancelStream = await decentralizedexchange.queryFilter("Cancel", 0, block)
     const cancelledOrders = cancelStream.map(event => event.args)
 
-    dispatch({ type: "CANCELLED_ORDERS_LOADED", cancelledOrders })
+    dispatch({type: "CANCELLED_ORDERS_LOADED", cancelledOrders})
 
     // Fetch filled orders
     const tradeStream = await decentralizedexchange.queryFilter("Trade", 0, block)
     const filledOrders = tradeStream.map(event => event.args)
 
-    dispatch({ type: "FILLED_ORDERS_LOADED", filledOrders })
+    dispatch({type: "FILLED_ORDERS_LOADED", filledOrders})
 
     // Fetch all orders
     const orderStream = await decentralizedexchange.queryFilter("Order", 0, block)
     const allOrders = orderStream.map(event => event.args)
 
-    dispatch({ type: "ALL_ORDERS_LOADED", allOrders })
+    dispatch({type: "ALL_ORDERS_LOADED", allOrders})
 }
 
 // TRANSFER TOKENS (DEPOSIT & WITHDRAWS)
 export const transferTokens = async (provider, decentralizedexchange, transferType, token, amount, dispatch) => {
     let transaction
 
-    dispatch({ type: "TRANSFER_REQUESTED" })
+    dispatch({type: "TRANSFER_REQUESTED"})
 
     try {
         const signer = await provider.getSigner()
@@ -125,7 +125,7 @@ export const transferTokens = async (provider, decentralizedexchange, transferTy
         await transaction.wait()
 
     } catch (error) {
-        dispatch({ type: "TRANSFER_FAILED" })
+        dispatch({type: "TRANSFER_FAILED"})
     }
 }
 
@@ -136,14 +136,14 @@ export const makeBuyOrder = async (provider, decentralizedexchange, tokens, orde
     const tokenGive = tokens[1].address
     const amountGive = ethers.utils.parseUnits((order.amount * order.price).toString(), 18)
 
-    dispatch({ type: "NEW_ORDER_REQUESTED" })
+    dispatch({type: "NEW_ORDER_REQUESTED"})
 
     try {
         const signer = await provider.getSigner()
         const transaction = await decentralizedexchange.connect(signer).makeOrder(tokenGet, amountGet, tokenGive, amountGive)
         await transaction.wait()
     } catch (error) {
-        dispatch({ type: "NEW_ORDER_FAILED" })
+        dispatch({type: "NEW_ORDER_FAILED"})
     }
 }
 
@@ -153,14 +153,14 @@ export const makeSellOrder = async (provider, decentralizedexchange, tokens, ord
     const tokenGive = tokens[0].address
     const amountGive = ethers.utils.parseUnits(order.amount, 18)
 
-    dispatch({ type: "NEW_ORDER_REQUESTED" })
+    dispatch({type: "NEW_ORDER_REQUESTED"})
 
     try {
         const signer = await provider.getSigner()
         const transaction = await decentralizedexchange.connect(signer).makeOrder(tokenGet, amountGet, tokenGive, amountGive)
         await transaction.wait()
     } catch (error) {
-        dispatch({ type: "NEW_ORDER_FAILED" })
+        dispatch({type: "NEW_ORDER_FAILED"})
     }
 }
 

@@ -1,7 +1,8 @@
-import { useState, useRef } from "react";
-import { useDispatch, useSelector } from "react-redux"
+import {useRef, useState} from "react";
+import {useDispatch, useSelector} from "react-redux"
 
-import { makeBuyOrder, makeSellOrder } from "../store/interactions"
+import {makeBuyOrder, makeSellOrder} from "../store/interactions"
+
 const Order = () => {
     const [isBuy, setIsBuy] = useState(true)
     const [amount, setAmount] = useState(0)
@@ -17,7 +18,7 @@ const Order = () => {
     const sellRef = useRef(null)
 
     const tabHandler = (e) => {
-        if(e.target.className !== buyRef.current.className) {
+        if (e.target.className !== buyRef.current.className) {
             e.target.className = "tab tab--active"
             buyRef.current.className = "tab"
             setIsBuy(false)
@@ -29,14 +30,14 @@ const Order = () => {
     }
     const buyHandler = (e) => {
         e.preventDefault()
-        makeBuyOrder(provider, decentralizedexchange, tokens, { amount, price }, dispatch)
+        makeBuyOrder(provider, decentralizedexchange, tokens, {amount, price}, dispatch)
         setAmount(0)
         setPrice(0)
     }
 
     const sellHandler = (e) => {
         e.preventDefault()
-        makeSellOrder(provider, decentralizedexchange, tokens, { amount, price }, dispatch)
+        makeSellOrder(provider, decentralizedexchange, tokens, {amount, price}, dispatch)
         setAmount(0)
         setPrice(0)
     }
@@ -51,7 +52,7 @@ const Order = () => {
                 </div>
             </div>
 
-            <form onSubmit={ isBuy ? buyHandler : sellHandler}>
+            <form onSubmit={isBuy ? buyHandler : sellHandler}>
 
                 {isBuy ? (
                     <label htmlFor="amount">Buy Amount</label>

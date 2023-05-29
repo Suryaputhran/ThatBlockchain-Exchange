@@ -1,8 +1,8 @@
-import { useSelector, useDispatch } from "react-redux"
+import {useDispatch, useSelector} from "react-redux"
 import Blockies from "react-blockies"
 import logo from "../assets/logo.png"
 import eth from "../assets/eth.png"
-import { loadAccount } from "../store/interactions"
+import {loadAccount} from "../store/interactions"
 import config from "../config.json";
 
 const Navbar = () => {
@@ -20,11 +20,11 @@ const Navbar = () => {
     const networkHandler = async (e) => {
         await window.ethereum.request({
             method: "wallet_switchEthereumChain",
-            params: [{ chainId: e.target.value }],
+            params: [{chainId: e.target.value}],
         })
     }
 
-    return(
+    return (
         <div className="exchange__header grid">
             <div className="exchange__header--brand flex">
                 <img src={logo} className="logo" alt="Exchange Logo"></img>
@@ -32,10 +32,11 @@ const Navbar = () => {
             </div>
 
             <div className="exchange__header--networks flex">
-                <img src={eth} alt="ETH Logo" className="Eth Logo" />
+                <img src={eth} alt="ETH Logo" className="Eth Logo"/>
 
                 {chainId && (
-                    <select name="networks" id="networks" value={config[chainId] ? `0x${chainId.toString(16)}` : `0`} onChange={networkHandler}>
+                    <select name="networks" id="networks" value={config[chainId] ? `0x${chainId.toString(16)}` : `0`}
+                            onChange={networkHandler}>
                         <option value="0" disabled>Select Network</option>
                         <option value="0x7A69">Localhost</option>
                         <option value="0x1">Ethereum</option>
@@ -77,7 +78,7 @@ const Navbar = () => {
                         target="_blank"
                         rel="noreferrer"
                     >
-                        {account.slice(0,5) + "..." + account.slice(38,42)}
+                        {account.slice(0, 5) + "..." + account.slice(38, 42)}
                         <Blockies
                             seed={account}
                             size={10}
