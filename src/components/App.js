@@ -1,12 +1,13 @@
 import { useEffect } from "react";
 import config from "../config.json"
 import  { useDispatch } from "react-redux";
-import { loadProvider, loadNetwork, loadAccount, loadTokens, loadExchange, subscribeToEvents} from "../store/interactions";
+import { loadProvider, loadNetwork, loadAccount, loadTokens, loadExchange, loadAllOrders, subscribeToEvents} from "../store/interactions";
 
+import Order from "./Order";
 import Navbar from "./Navbar";
 import Markets from "./Markets";
 import Balance from "./Balance";
-import Order from "./Order";
+import OrderBook from "./OrderBook";
 
 function App() {
 
@@ -39,6 +40,9 @@ function App() {
         const decentralizedexchangeConfig = config[chainId].decentralizedexchange
         const decentralizedexchange = await loadExchange(provider, decentralizedexchangeConfig.address, dispatch)
 
+        //Fetch All Orders: Open, Filled, Cancelled
+        loadAllOrders(provider, decentralizedexchange, dispatch)
+
         // Listen to events
         subscribeToEvents(decentralizedexchange, dispatch)
     }
@@ -61,6 +65,7 @@ function App() {
 
                     <Order/>
 
+
                 </section>
                 <section className="exchange__section--right grid">
 
@@ -70,7 +75,7 @@ function App() {
 
                     {/* Trades */}
 
-                    {/* OrderBook */}
+                    <OrderBook/>
 
                 </section>
             </main>

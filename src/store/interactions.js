@@ -81,6 +81,30 @@ export const loadBalances = async (decentralizedexchange, tokens, account, dispa
     dispatch({ type: "DEX_TOKEN_2_BALANCE_LOADED", balance })
 }
 
+// LOAD ALL ORDERS
+export const loadAllOrders = async (provider, decentralizedexchange, dispatch) => {
+
+    const block = await provider.getBlockNumber()
+
+    // Fetch canceled orders
+    const cancelStream = await decentralizedexchange.queryFilter("Cancel", 0, block)
+    const cancelledOrders = cancelStream.map(event => event.args)
+
+    dispatch({ type: "CANCELLED_ORDERS_LOADED", cancelledOrders })
+
+    // Fetch filled orders
+    const tradeStream = await decentralizedexchange.queryFilter("Trade", 0, block)
+    const filledOrders = tradeStream.map(event => event.args)
+
+    dispatch({ type: "FILLED_ORDERS_LOADED", filledOrders })
+
+    // Fetch all orders
+    const orderStream = await decentralizedexchange.queryFilter("Order", 0, block)
+    const allOrders = orderStream.map(event => event.args)
+
+    dispatch({ type: "ALL_ORDERS_LOADED", allOrders })
+}
+
 // TRANSFER TOKENS (DEPOSIT & WITHDRAWS)
 export const transferTokens = async (provider, decentralizedexchange, transferType, token, amount, dispatch) => {
     let transaction
@@ -140,40 +164,3 @@ export const makeSellOrder = async (provider, decentralizedexchange, tokens, ord
     }
 }
 
-
-
-
-
-//
-//
-// export const makeSellOrder = async (provider, decentralizedexchange, tokens, order, dispatch) => {
-//     const tokenGet = tokens[1].address
-//     const amountGet = ethers.utils.parseUnits((order.amount * order.price).toString(), 18)
-//     const tokenGive = tokens[0].address
-//     const amountGive = ethers.utils.parseUnits(order.amount, 18)
-//
-//     dispatch({ type: "NEW_ORDER_REQUESTED" })
-//
-//     try {
-//         const signer = await provider.getSigner()
-//         const transaction = await decentralizedexchange.connect(signer).makeOrder(tokenGet, amountGet, tokenGive, amountGive)
-//         await transaction.wait()
-//     } catch (error) {
-//         dispatch({ type: "NEW_ORDER_FAILED" })
-//     }
-// }export const makeSellOrder = async (provider, decentralizedexchange, tokens, order, dispatch) => {
-//     const tokenGet = tokens[1].address
-//     const amountGet = ethers.utils.parseUnits((order.amount * order.price).toString(), 18)
-//     const tokenGive = tokens[0].address
-//     const amountGive = ethers.utils.parseUnits(order.amount, 18)
-//
-//     dispatch({ type: "NEW_ORDER_REQUESTED" })
-//
-//     try {
-//         const signer = await provider.getSigner()
-//         const transaction = await decentralizedexchange.connect(signer).makeOrder(tokenGet, amountGet, tokenGive, amountGive)
-//         await transaction.wait()
-//     } catch (error) {
-//         dispatch({ type: "NEW_ORDER_FAILED" })
-//     }
-// }

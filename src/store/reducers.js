@@ -96,7 +96,31 @@ export const decentralizedexchange = (state = DEFAULT_DEX_STATE, action) => {
                 ...state,
                 balances: [...state.balances, action.balance]
             }
-
+        //ORDERS LOADED (CANCELLED, FILLED & ALL)
+        case "CANCELLED_ORDERS_LOADED":
+            return {
+                ...state,
+                cancelledOrders: {
+                    loaded: true,
+                    data: action.cancelledOrders
+                }
+            }
+        case "FILLED_ORDERS_LOADED":
+            return {
+                ...state,
+                filledOrders: {
+                    loaded: true,
+                    data: action.filledOrders
+                }
+            }
+        case "ALL_ORDERS_LOADED":
+            return {
+                ...state,
+                allOrders: {
+                    loaded: true,
+                    data: action.allOrders
+                }
+            }
         // TRANSFER CASES (DEPOSIT & WITHDRAWS)
         case "TRANSFER_REQUESTED":
             return {
@@ -131,7 +155,6 @@ export const decentralizedexchange = (state = DEFAULT_DEX_STATE, action) => {
                 },
                 transferInProgress: false
             }
-
         // MAKING ORDERS CASES
         case "NEW_ORDER_REQUESTED":
             return {
@@ -142,10 +165,9 @@ export const decentralizedexchange = (state = DEFAULT_DEX_STATE, action) => {
                     isSuccessful: false
                 },
             }
-
         case "NEW_ORDER_SUCCESSFUL":
             // Prevent duplicate orders
-            index = state.allOrders.data.findIndex(order => order.id === action.order.id)
+            index = state.allOrders.data.findIndex(order => order.id.toString() === action.order.id.toString())
 
             if(index === -1) {
                 data = [...state.allOrders.data, action.order]
@@ -166,7 +188,6 @@ export const decentralizedexchange = (state = DEFAULT_DEX_STATE, action) => {
                 },
                 events: [action.event, ...state.events]
             }
-
         case "NEW_ORDER_FAILED":
             return {
                 ...state,
@@ -177,7 +198,6 @@ export const decentralizedexchange = (state = DEFAULT_DEX_STATE, action) => {
                     isError: true
                 },
             }
-
         default:
             return state
     }
