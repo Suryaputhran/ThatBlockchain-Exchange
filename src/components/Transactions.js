@@ -1,15 +1,20 @@
 import {useRef, useState} from "react";
-import {useSelector} from "react-redux"
+import {useDispatch, useSelector} from "react-redux"
 import {myFilledOrdersSelector, myOpenOrdersSelector} from "../store/selectors"
-import Banner from "./Banner";
 import sort from "../assets/sort.png";
+import {cancelOrder} from "../store/interactions"
+import Banner from "./Banner";
 
 const Transactions = () => {
     const [showMyOrders, setShowMyOrders] = useState(true)
+
+    const provider = useSelector(state => state.provider.connection)
+    const decentralizedexchange = useSelector(state => state.decentralizedexchange.contract)
     const symbols = useSelector(state => state.tokens.symbols)
     const myOpenOrders = useSelector(myOpenOrdersSelector)
     const myFilledOrders = useSelector(myFilledOrdersSelector)
 
+    const dispatch = useDispatch()
 
     const tradeRef = useRef(null)
     const orderRef = useRef(null)
@@ -24,6 +29,10 @@ const Transactions = () => {
             tradeRef.current.className = "tab"
             setShowMyOrders(true)
         }
+    }
+
+    const cancelHandler = (order) => {
+        cancelOrder(provider, decentralizedexchange, order, dispatch)
     }
 
     return (
@@ -46,7 +55,7 @@ const Transactions = () => {
                             <thead>
                             <tr>
                                 <th>{symbols && symbols[0]}<img src={sort} alt="Sort"/></th>
-                                <th>{symbols && symbols[0]}➞{symbols && symbols[1]}<img src={sort} alt="Sort"/></th>
+                                <th>{symbols && symbols[0]}/{symbols && symbols[1]}<img src={sort} alt="Sort"/></th>
                                 <th></th>
                             </tr>
                             </thead>
@@ -57,7 +66,10 @@ const Transactions = () => {
                                     <tr key={index}>
                                         <td style={{color: `${order.orderTypeClass}`}}>{order.token0Amount}</td>
                                         <td>{order.tokenPrice}</td>
-                                        <td>{/* TODO: Cancel order */}</td>
+                                        <td>
+                                            <button className="button--sm" onClick={() => cancelHandler(order)}>Cancel
+                                            </button>
+                                        </td>
                                     </tr>
                                 )
                             })}
@@ -82,7 +94,7 @@ const Transactions = () => {
                         <tr>
                             <th>Time<img src={sort} alt="Sort"/></th>
                             <th>{symbols && symbols[0]}<img src={sort} alt="Sort"/></th>
-                            <th>{symbols && symbols[0]}➞{symbols && symbols[1]}<img src={sort} alt="Sort"/></th>
+                            <th>{symbols && symbols[0]}/{symbols && symbols[1]}<img src={sort} alt="Sort"/></th>
                         </tr>
                         </thead>
                         <tbody>

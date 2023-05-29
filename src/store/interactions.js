@@ -52,6 +52,11 @@ export const loadExchange = async (provider, address, dispatch) => {
 }
 
 export const subscribeToEvents = (decentralizedexchange, dispatch) => {
+    decentralizedexchange.on("Cancel", (id, user, tokenGet, amountGet, tokenGive, amountGive, timestamp, event) => {
+        const order = event.args
+        dispatch({ type: "ORDER_CANCELLATION_SUCCESSFUL", order, event })
+    })
+
     decentralizedexchange.on("Deposit", (token, user, amount, balance, event) => {
         dispatch({type: "TRANSFER_SUCCESSFUL", event})
     })
@@ -164,3 +169,16 @@ export const makeSellOrder = async (provider, decentralizedexchange, tokens, ord
     }
 }
 
+// CANCEL ORDER
+export const cancelOrder = async (provider, decentralizedexchange, order, dispatch) => {
+
+    dispatch({ type: "ORDER_CANCELLATION_REQUESTED" })
+
+    try {
+        const signer = await provider.getSigner()
+        const transaction = await decentralizedexchange.connect(signer).cancelOrder(order.id)
+        await transaction.wait()
+    } catch (error) {
+        dispatch({ type: "ORDER_CANCELLATION_FAILED" })
+    }
+}

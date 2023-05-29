@@ -95,6 +95,48 @@ export const decentralizedexchange = (state = DEFAULT_DEX_STATE, action) => {
                     loaded: true, data: action.allOrders
                 }
             }
+
+        // CANCELLING ORDERS
+        case "ORDER_CANCELLATION_REQUESTED":
+            return {
+                ...state,
+                transaction: {
+                    transactionType: "Cancel",
+                    isPending: true,
+                    isSuccessful: false
+                }
+            }
+
+        case "ORDER_CANCELLATION_SUCCESSFUL":
+            return {
+                ...state,
+                transaction: {
+                    transactionType: "Cancel",
+                    isPending: false,
+                    isSuccessful: true
+                },
+                cancelledOrders: {
+                    ...state.cancelledOrders,
+                    data: [
+                        ...state.cancelledOrders.data,
+                        action.order
+                    ]
+                },
+                events: [action.event, ...state.events]
+            }
+
+        case "ORDER_CANCELLATION_FAILED":
+            return {
+                ...state,
+                transaction: {
+                    transactionType: "Cancel",
+                    isPending: false,
+                    isSuccessful: false,
+                    isError: true
+                }
+            }
+
+
         // TRANSFER CASES (DEPOSIT & WITHDRAWS)
         case "TRANSFER_REQUESTED":
             return {
@@ -123,7 +165,7 @@ export const decentralizedexchange = (state = DEFAULT_DEX_STATE, action) => {
                 },
             }
         case "NEW_ORDER_SUCCESSFUL":
-            // Prevent duplicate orders
+            // Prevents duplicate orders
             index = state.allOrders.data.findIndex(order => order.id.toString() === action.order.id.toString())
 
             if (index === -1) {
