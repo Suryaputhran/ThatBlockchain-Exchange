@@ -57,6 +57,11 @@ export const subscribeToEvents = (decentralizedexchange, dispatch) => {
         dispatch({ type: "ORDER_CANCELLATION_SUCCESSFUL", order, event })
     })
 
+    decentralizedexchange.on("Trade", (id, user, tokenGet, amountGet, tokenGive, amountGive, creator, timestamp, event) => {
+        const order = event.args
+        dispatch({ type: "FILL_ORDER_SUCCESSFUL", order, event })
+    })
+
     decentralizedexchange.on("Deposit", (token, user, amount, balance, event) => {
         dispatch({type: "TRANSFER_SUCCESSFUL", event})
     })
@@ -180,5 +185,19 @@ export const cancelOrder = async (provider, decentralizedexchange, order, dispat
         await transaction.wait()
     } catch (error) {
         dispatch({ type: "ORDER_CANCELLATION_FAILED" })
+    }
+}
+
+// FILL ORDER
+
+export const fillOrder = async (provider, decentralizedexchange, order, dispatch) => {
+    dispatch({ type: "FILL_ORDER_REQUESTED" })
+
+    try {
+        const signer = await provider.getSigner()
+        const transaction = await decentralizedexchange.connect(signer).fillOrder(order.id)
+        await transaction.wait()
+    } catch (error) {
+        dispatch({ type: "FILL_ORDER_FAILED" })
     }
 }

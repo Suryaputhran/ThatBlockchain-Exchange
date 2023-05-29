@@ -56,7 +56,12 @@ const DEFAULT_DEX_STATE = {
         isSuccessful: false
     }, allOrders: {
         loaded: false, data: []
-    }, events: []
+    }, cancelledOrders: {
+        data: []
+    },filledOrders: {
+        data: []
+    },
+    events: []
 }
 
 export const decentralizedexchange = (state = DEFAULT_DEX_STATE, action) => {
@@ -76,6 +81,7 @@ export const decentralizedexchange = (state = DEFAULT_DEX_STATE, action) => {
             return {
                 ...state, balances: [...state.balances, action.balance]
             }
+
         //ORDERS LOADED (CANCELLED, FILLED & ALL)
         case "CANCELLED_ORDERS_LOADED":
             return {
@@ -136,6 +142,49 @@ export const decentralizedexchange = (state = DEFAULT_DEX_STATE, action) => {
                 }
             }
 
+        // FILLING ORDERS
+        case "FILL_ORDER_REQUESTED":
+            return {
+                ...state,
+                transaction: {
+                    transactionType: "Fill Order",
+                    isPending: true,
+                    isSuccessful: false
+                }
+            }
+        case "FILL_ORDER_SUCCESSFUL":
+            // Prevent duplicate orders
+            index = state.filledOrders.data.findIndex(order => order.id.toString() === action.order.id.toString())
+
+            if (index === -1) {
+                data = [...state.filledOrders.data, action.order]
+            } else {
+                data = state.filledOrders.data
+            }
+
+            return {
+                ...state,
+                transaction: {
+                    transactionType: "Fill Order",
+                    isPending: false,
+                    isSuccessful: true
+                },
+                filledOrders: {
+                    ...state.filledOrders,
+                    data
+                },
+                events: [action.event, ...state.events]
+            }
+        case "FILL_ORDER_FAILED":
+            return {
+                ...state,
+                transaction: {
+                    transactionType: "Fill Order",
+                    isPending: false,
+                    isSuccessful: false,
+                    isError: true
+                }
+            }
 
         // TRANSFER CASES (DEPOSIT & WITHDRAWS)
         case "TRANSFER_REQUESTED":

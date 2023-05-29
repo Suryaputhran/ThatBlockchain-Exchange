@@ -1,21 +1,33 @@
-import {useSelector} from "react-redux"
+import {useDispatch, useSelector} from "react-redux"
 
-// Import Asset & Selectors
+// Import Asset, Selectors, Interactions
 import sort from "../assets/sort.png"
 import {orderBookSelector} from "../store/selectors"
+import { fillOrder } from "../store/interactions";
 
 const OrderBook = () => {
+    const provider = useSelector(state => state.provider.connection)
+    const decentralizedexchange = useSelector(state => state.decentralizedexchange.contract)
     const symbols = useSelector(state => state.tokens.symbols)
     const orderBook = useSelector(orderBookSelector)
 
-    return (<div className="component exchange__orderbook">
+    const dispatch = useDispatch()
+
+    const fillOrderHandler = (order) => {
+        fillOrder(provider, decentralizedexchange, order, dispatch)
+    }
+
+    return (
+        <div className="component exchange__orderbook">
             <div className="component__header flex-between">
                 <h2>Order Book</h2>
             </div>
 
             <div className="flex">
 
-                {!orderBook || orderBook.sellOrders.length === 0 ? (<p className="flex-center">No Sell Orders</p>) : (
+                {!orderBook || orderBook.sellOrders.length === 0 ? (
+                    <p className="flex-center">No Sell Orders</p>
+                ) : (
                     <table className="exchange__orderbook--sell">
                         <caption>Selling</caption>
                         <thead>
@@ -26,20 +38,28 @@ const OrderBook = () => {
                         </tr>
                         </thead>
                         <tbody>
+
                         {/* MAPPING OF SELL ORDERS... */}
+
                         {orderBook && orderBook.sellOrders.map((order, index) => {
-                            return (<tr key={index}>
+                            return (
+                                <tr key={index} onClick={() => fillOrderHandler(order)}>
                                     <td>{order.token0Amount}</td>
                                     <td style={{color: `${order.orderTypeClass}`}}>{order.tokenPrice}</td>
                                     <td>{order.token1Amount}</td>
-                                </tr>)
+                                </tr>
+                            )
                         })}
+
                         </tbody>
-                    </table>)}
+                    </table>
+                )}
 
                 <div className="divider"></div>
 
-                {!orderBook || orderBook.buyOrders.length === 0 ? (<p className="flex-center">No Buy Orders</p>) : (
+                {!orderBook || orderBook.buyOrders.length === 0 ? (
+                    <p className="flex-center">No Buy Orders</p>
+                ) : (
                     <table className="exchange__orderbook--buy">
                         <caption>Buying</caption>
                         <thead>
@@ -54,18 +74,22 @@ const OrderBook = () => {
                         {/* MAPPING OF BUY ORDERS... */}
 
                         {orderBook && orderBook.buyOrders.map((order, index) => {
-                            return (<tr key={index}>
+                            return (
+                                <tr key={index} onClick={() => fillOrderHandler(order)}>
                                     <td>{order.token0Amount}</td>
                                     <td style={{color: `${order.orderTypeClass}`}}>{order.tokenPrice}</td>
                                     <td>{order.token1Amount}</td>
-                                </tr>)
+                                </tr>
+                            )
                         })}
 
                         </tbody>
-                    </table>)}
+                    </table>
+                )}
 
             </div>
-        </div>);
+        </div>
+    );
 }
 
 export default OrderBook;
