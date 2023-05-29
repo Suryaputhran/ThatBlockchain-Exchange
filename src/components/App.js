@@ -12,6 +12,7 @@ import {
 } from "../store/interactions";
 
 import Order from "./Order";
+import Trades from "./Trades";
 import Navbar from "./Navbar";
 import Markets from "./Markets";
 import Balance from "./Balance";
@@ -82,7 +83,7 @@ function App() {
 
                     {/* Transactions */}
 
-                    {/* Trades */}
+                    <Trades/>
 
                     <OrderBook/>
 

@@ -8,17 +8,14 @@ const OrderBook = () => {
     const symbols = useSelector(state => state.tokens.symbols)
     const orderBook = useSelector(orderBookSelector)
 
-    return (
-        <div className="component exchange__orderbook">
+    return (<div className="component exchange__orderbook">
             <div className="component__header flex-between">
                 <h2>Order Book</h2>
             </div>
 
             <div className="flex">
 
-                {!orderBook || orderBook.sellOrders.length === 0 ? (
-                    <p className="flex-center">No Sell Orders</p>
-                ) : (
+                {!orderBook || orderBook.sellOrders.length === 0 ? (<p className="flex-center">No Sell Orders</p>) : (
                     <table className="exchange__orderbook--sell">
                         <caption>Selling</caption>
                         <thead>
@@ -31,23 +28,18 @@ const OrderBook = () => {
                         <tbody>
                         {/* MAPPING OF SELL ORDERS... */}
                         {orderBook && orderBook.sellOrders.map((order, index) => {
-                            return (
-                                <tr key={index}>
+                            return (<tr key={index}>
                                     <td>{order.token0Amount}</td>
                                     <td style={{color: `${order.orderTypeClass}`}}>{order.tokenPrice}</td>
                                     <td>{order.token1Amount}</td>
-                                </tr>
-                            )
+                                </tr>)
                         })}
                         </tbody>
-                    </table>
-                )}
+                    </table>)}
 
                 <div className="divider"></div>
 
-                {!orderBook || orderBook.buyOrders.length === 0 ? (
-                    <p className="flex-center">No Buy Orders</p>
-                ) : (
+                {!orderBook || orderBook.buyOrders.length === 0 ? (<p className="flex-center">No Buy Orders</p>) : (
                     <table className="exchange__orderbook--buy">
                         <caption>Buying</caption>
                         <thead>
@@ -62,22 +54,18 @@ const OrderBook = () => {
                         {/* MAPPING OF BUY ORDERS... */}
 
                         {orderBook && orderBook.buyOrders.map((order, index) => {
-                            return (
-                                <tr key={index}>
+                            return (<tr key={index}>
                                     <td>{order.token0Amount}</td>
                                     <td style={{color: `${order.orderTypeClass}`}}>{order.tokenPrice}</td>
                                     <td>{order.token1Amount}</td>
-                                </tr>
-                            )
+                                </tr>)
                         })}
 
                         </tbody>
-                    </table>
-                )}
+                    </table>)}
 
             </div>
-        </div>
-    );
+        </div>);
 }
 
 export default OrderBook;
