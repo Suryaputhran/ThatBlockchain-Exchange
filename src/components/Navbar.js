@@ -1,9 +1,9 @@
-import {useDispatch, useSelector} from "react-redux"
+import eth from "../assets/eth.png"
+import config from "../config.json"
 import Blockies from "react-blockies"
 import logo from "../assets/logo.png"
-import eth from "../assets/eth.png"
 import {loadAccount} from "../store/interactions"
-import config from "../config.json";
+import {useDispatch, useSelector} from "react-redux"
 
 const Navbar = () => {
 
@@ -65,7 +65,6 @@ const Navbar = () => {
                         <option value="0x118">zkSync Era Testnet</option>
                     </select>
                 )}
-
             </div>
 
             <div className="exchange__header--account flex">
