@@ -1,4 +1,5 @@
 export const options = {
+
     chart: {
         animations: { enabled: true },
         toolbar: { show: false },

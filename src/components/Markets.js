@@ -4,6 +4,7 @@ import { loadTokens } from "../store/interactions"
 import config from "../config.json"
 
 const Markets = () => {
+
     const provider = useSelector(state => state.provider.connection)
     const chainId = useSelector(state => state.provider.chainId)
 
@@ -76,7 +77,6 @@ const Markets = () => {
                     <p>The Network deployment has not been executed.</p>
                 </div>
             )}
-
             <hr />
         </div>
     )

@@ -6,6 +6,7 @@ import {orderBookSelector} from "../store/selectors"
 import { fillOrder } from "../store/interactions";
 
 const OrderBook = () => {
+
     const provider = useSelector(state => state.provider.connection)
     const decentralizedexchange = useSelector(state => state.decentralizedexchange.contract)
     const symbols = useSelector(state => state.tokens.symbols)

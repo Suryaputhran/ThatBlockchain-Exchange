@@ -6,6 +6,7 @@ import {loadAccount} from "../store/interactions"
 import config from "../config.json";
 
 const Navbar = () => {
+
     const provider = useSelector(state => state.provider.connection)
     const chainId = useSelector(state => state.provider.chainId)
     const account = useSelector(state => state.provider.account)
@@ -26,6 +27,7 @@ const Navbar = () => {
 
     return (
         <div className="exchange__header grid">
+
             <div className="exchange__header--brand flex">
                 <img src={logo} className="logo" alt="Exchange Logo"></img>
                 <h1>ThatBlockchain Exchange</h1>

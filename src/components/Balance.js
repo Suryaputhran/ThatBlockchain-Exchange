@@ -9,7 +9,6 @@ const Balance = () => {
 
     const [isDeposit, setIsDeposit] = useState(true)
 
-
     const [token1TransferAmount, setToken1TransferAmount] = useState(0)
     const [token2TransferAmount, setToken2TransferAmount] = useState(0)
 

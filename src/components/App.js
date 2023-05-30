@@ -11,14 +11,15 @@ import {
     subscribeToEvents
 } from "../store/interactions";
 
-import Order from "./Order";
-import Trades from "./Trades";
-import Navbar from "./Navbar";
-import Markets from "./Markets";
-import Balance from "./Balance";
-import OrderBook from "./OrderBook";
-import PriceChart from "./PriceChart";
-import Transactions from  "./Transactions";
+import Alert from  "./Alert"
+import Order from "./Order"
+import Trades from "./Trades"
+import Navbar from "./Navbar"
+import Markets from "./Markets"
+import Balance from "./Balance"
+import OrderBook from "./OrderBook"
+import PriceChart from "./PriceChart"
+import Transactions from  "./Transactions"
 
 function App() {
 
@@ -75,9 +76,8 @@ function App() {
                     <Balance/>
 
                     <Order/>
-
-
                 </section>
+
                 <section className="exchange__section--right grid">
 
                     <PriceChart/>
@@ -91,7 +91,7 @@ function App() {
                 </section>
             </main>
 
-            {/* Alert */}
+            <Alert/>
 
         </div>
     );

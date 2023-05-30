@@ -4,6 +4,7 @@ import {useDispatch, useSelector} from "react-redux"
 import {makeBuyOrder, makeSellOrder} from "../store/interactions"
 
 const Order = () => {
+
     const [isBuy, setIsBuy] = useState(true)
     const [amount, setAmount] = useState(0)
     const [price, setPrice] = useState(0)

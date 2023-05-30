@@ -4,6 +4,7 @@ import {useSelector} from "react-redux"
 import {filledOrdersSelector} from "../store/selectors"
 
 const Trades = () => {
+
     const symbols = useSelector(state => state.tokens.symbols)
     const filledOrders = useSelector(filledOrdersSelector)
 
