@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import config from "../config.json";
 import { myEventsSelector } from "../store/selectors";
 
-const Alert = () => {
+const TransactionStatus = () => {
     const alertRef = useRef(null)
 
     const network = useSelector(state => state.provider.network)
@@ -13,12 +13,12 @@ const Alert = () => {
     const events = useSelector(myEventsSelector)
 
     const removeHandler = async (e) => {
-        alertRef.current.className = "alert--remove"
+        alertRef.current.className = "transactionStatus--remove"
     }
 
     useEffect(() => {
         if((events[0] || isPending || isError) && account) {
-            alertRef.current.className = "alert"
+            alertRef.current.className = "transactionStatus"
         }
     }, [events, isPending, isError, account])
 
@@ -26,34 +26,34 @@ const Alert = () => {
         <div>
             {isPending ? (
 
-                <div className="alert alert--remove" onClick={removeHandler} ref={alertRef}>
-                    <h1>Transaction Pending...</h1>
+                <div className="transactionStatus transactionStatus--remove" onClick={removeHandler} ref={alertRef}>
+                    <h1 style={{ color: "#00BFFF" }}>Transaction Pending...</h1>
                 </div>
 
             ) : isError ? (
 
-                <div className="alert alert--remove" onClick={removeHandler} ref={alertRef}>
-                    <h1>Transaction Will Fail</h1>
+                <div className="transactionStatus transactionStatus--remove" onClick={removeHandler} ref={alertRef}>
+                    <h1 style={{ color: "#FF0000" }}>Transaction Failed</h1>
                 </div>
 
             ) : !isPending && events[0] ? (
 
-                <div className="alert alert--remove" onClick={removeHandler} ref={alertRef}>
-                    <h1>Transaction Successful</h1>
+                <div className="transactionStatus transactionStatus--remove" onClick={removeHandler} ref={alertRef}>
+                    <h1 style={{ color: "#32CD32" }}>Transaction Successful</h1>
                     <a
                         href={config[network] ? `${config[network].explorerURL}/tx/${events[0].transactionHash}` : "#"}
                         target="_blank"
                         rel="noreferrer"
                     >
-                        {events[0].transactionHash.slice(0, 6) + "..." + events[0].transactionHash.slice(60, 66)}
+                        {events[0].transactionHash.slice(0, 9) + "...." + events[0].transactionHash.slice(57, 66)}
                     </a>
                 </div>
 
             ) : (
-                <div className="alert alert--remove" onClick={removeHandler} ref={alertRef}></div>
+                <div className="transactionStatus transactionStatus--remove" onClick={removeHandler} ref={alertRef}></div>
             )}
         </div>
     );
 }
 
-export default Alert;
+export default TransactionStatus;

@@ -582,13 +582,12 @@ table td {
 }
 
 /* ------------------------------------------------------ */
-/* -- Alert -- */
+/* -- TransactionStatus -- */
 
-.alert {
+.transactionStatus {
     background: #222D41;
-
-    height: 100px;
-    width: 300px;
+    height: 70px;
+    width: 285px;
 
     position: fixed;
     bottom: 1.50em;
@@ -599,6 +598,7 @@ table td {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    border-radius: 10px;
 
     text-align: center;
 
@@ -607,17 +607,17 @@ table td {
     transition: all 500ms ease;
 }
 
-.alert a {
+.transactionStatus a {
     color: var(--clr-blue);
     text-decoration: none;
     margin: 0.25em;
 }
 
-.alert a:hover {
+.transactionStatus a:hover {
     color: var(--clr-white);
 }
 
-.alert--remove {
+.transactionStatus--remove {
     opacity: 0;
     pointer-events: none;
 }

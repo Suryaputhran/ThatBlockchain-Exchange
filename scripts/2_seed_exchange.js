@@ -1,7 +1,7 @@
 // noinspection JSUnusedAssignment
 /* eslint-disable no-undef */
 
-const config = require('../src/config.json')
+const config = require("../src/config.json")
 
 const tokens = (n) => {
     return ethers.utils.parseUnits(n.toString(), "ether")

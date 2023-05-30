@@ -164,11 +164,11 @@ describe("Decentralized Exchange", () => {
                 result = await transaction.wait()
             })
 
-            it('Tracks the newly created order', async () => {
+            it("Tracks the newly created order", async () => {
                 expect(await decentralizedexchange.orderCount()).to.equal(1)
             })
 
-            it('Emits an Order event', async () => {
+            it("Emits an Order event", async () => {
                 const event = result.events[0]
                 expect(event.event).to.equal("Order")
 
@@ -183,8 +183,8 @@ describe("Decentralized Exchange", () => {
             })
         })
 
-        describe('Failure', async () => {
-            it('Rejects with no balance', async () => {
+        describe("Failure", async () => {
+            it("Rejects with no balance", async () => {
                 await expect(decentralizedexchange.connect(user1).makeOrder(token2.address, tokens(1), token1.address, tokens(1))).to.be.reverted
             })
         })

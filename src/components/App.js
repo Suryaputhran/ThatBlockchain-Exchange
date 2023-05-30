@@ -11,7 +11,7 @@ import {
     subscribeToEvents
 } from "../store/interactions";
 
-import Alert from  "./Alert"
+// Importing Components
 import Order from "./Order"
 import Trades from "./Trades"
 import Navbar from "./Navbar"
@@ -20,6 +20,7 @@ import Balance from "./Balance"
 import OrderBook from "./OrderBook"
 import PriceChart from "./PriceChart"
 import Transactions from  "./Transactions"
+import TransactionStatus from  "./TransactionStatus"
 
 function App() {
 
@@ -91,7 +92,7 @@ function App() {
                 </section>
             </main>
 
-            <Alert/>
+            <TransactionStatus/>
 
         </div>
     );

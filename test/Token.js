@@ -82,7 +82,7 @@ describe("Token", () => {
 
             it("Rejects Invalid Recipient", async () => {
                 const amount = tokens(100)
-                await expect(token.connect(deployer).transfer('0x0000000000000000000000000000000000000000', amount)).to.be.reverted
+                await expect(token.connect(deployer).transfer("0x0000000000000000000000000000000000000000", amount)).to.be.reverted
             })
         })
     })
@@ -115,7 +115,7 @@ describe("Token", () => {
 
         describe("Failure", () => {
             it("Rejects Invalid Spenders", async () => {
-                await expect(token.connect(deployer).approve('0x0000000000000000000000000000000000000000', amount)).to.be.reverted
+                await expect(token.connect(deployer).approve("0x0000000000000000000000000000000000000000", amount)).to.be.reverted
             })
         })
 

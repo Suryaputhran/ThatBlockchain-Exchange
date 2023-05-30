@@ -29,12 +29,12 @@ const Balance = () => {
     const withdrawRef = useRef(null)
     const tabHandler = (e) => {
         if(e.target.className !== depositRef.current.className) {
-            e.target.className = 'tab tab--active'
-            depositRef.current.className = 'tab'
+            e.target.className = "tab tab--active"
+            depositRef.current.className = "tab"
             setIsDeposit(false)
         } else {
-            e.target.className = 'tab tab--active'
-            withdrawRef.current.className = 'tab'
+            e.target.className = "tab tab--active"
+            withdrawRef.current.className = "tab"
             setIsDeposit(true)
         }
     }
@@ -87,7 +87,7 @@ const Balance = () => {
                 </div>
             </div>
 
-            {/* Deposit/Withdraw Component 1 (finix) */}
+            {/* Deposit/Withdraw Component 1 (Finix) */}
 
             <div className="exchange__transfers--form">
                 <div className="flex-between">
