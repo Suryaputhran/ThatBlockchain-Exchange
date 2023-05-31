@@ -26,9 +26,38 @@
     },
     "explorerURL": "#"
   },
-
+  "11155111": {
+    "decentralizedexchange": {
+      "address": "0x5642171c2ef813e1525A278F4f6f77a9A36E6ad6"
+    },
+    "Finix": {
+      "address": "0x46320530C0b3f16D6fcd5E6b48BC19cfdA675Dba"
+    },
+    "Auriga": {
+      "address": "0xF4CfDfEA1A7Eb1214659BA08e3b8edd9F8c2Cf00"
+    },
+    "Empyrean": {
+      "address": "0x3b6C0e030170B754FEC374EA40Ac52cB160457FA"
+    },
+    "Helix": {
+      "address": "0x9A93128681DC7F0960DE72db14AFD27C2AF40D9e"
+    },
+    "Quantum": {
+      "address": "0x55F24d469869c083E9702296b405722E25d6C042"
+    },
+    "Sirius": {
+      "address": "0xDa70e9fce63aFd4d3F82dcFebe19B9Ec3D72936F"
+    },
+    "Zeroconium": {
+      "address": "0x0687610988e5A1cf4Dd6e1C3BB3820d2Bcf06bB3"
+    },
+    "explorerURL": "https://sepolia.etherscan.io/"
+  },
   "1" : {
     "explorerURL": "https://etherscan.io/"
+  },
+  "5" : {
+    "explorerURL": "https://goerli.etherscan.io/"
   },
   "42161" : {
     "explorerURL": "https://arbiscan.io/"
@@ -63,9 +92,6 @@
   "324" : {
     "explorerURL": "https://explorer.zksync.io/"
   },
-  "11155111" : {
-    "explorerURL": "https://sepolia.etherscan.io/"
-  },
   "97" : {
     "explorerURL": "https://testnet.bscscan.com/"
   },
@@ -80,9 +106,6 @@
   },
   "4002" : {
     "explorerURL": "https://testnet.ftmscan.com/"
-  },
-  "5" : {
-    "explorerURL": "https://goerli.etherscan.io/"
   },
   "42" : {
     "explorerURL": "https://kovan.etherscan.io/"

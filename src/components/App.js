@@ -1,6 +1,6 @@
 import {useEffect} from "react";
 import config from "../config.json"
-import {useDispatch} from "react-redux";
+import {useDispatch} from "react-redux"
 import {
     loadAccount,
     loadAllOrders,

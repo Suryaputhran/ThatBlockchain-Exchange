@@ -1,7 +1,7 @@
-import { useRef, useEffect } from "react"
-import { useSelector } from "react-redux";
 import config from "../config.json";
-import { myEventsSelector } from "../store/selectors";
+import { useRef, useEffect } from "react"
+import { useSelector } from "react-redux"
+import { myEventsSelector } from "../store/selectors"
 
 const TransactionStatus = () => {
     const alertRef = useRef(null)

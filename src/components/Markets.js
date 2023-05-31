@@ -1,7 +1,6 @@
-import { useSelector, useDispatch } from "react-redux"
-import { loadTokens } from "../store/interactions"
-
 import config from "../config.json"
+import { loadTokens } from "../store/interactions"
+import { useSelector, useDispatch } from "react-redux"
 
 const Markets = () => {
 

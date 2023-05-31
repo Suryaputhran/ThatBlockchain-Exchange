@@ -1,9 +1,9 @@
-import {useRef, useState} from "react";
+import Banner from "./Banner"
+import sort from "../assets/sort.png"
+import {useRef, useState} from "react"
+import {cancelOrder} from "../store/interactions"
 import {useDispatch, useSelector} from "react-redux"
 import {myFilledOrdersSelector, myOpenOrdersSelector} from "../store/selectors"
-import sort from "../assets/sort.png";
-import {cancelOrder} from "../store/interactions"
-import Banner from "./Banner";
 
 const Transactions = () => {
 

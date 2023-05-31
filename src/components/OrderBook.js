@@ -2,8 +2,8 @@ import {useDispatch, useSelector} from "react-redux"
 
 // Import Asset, Selectors, Interactions
 import sort from "../assets/sort.png"
+import { fillOrder } from "../store/interactions"
 import {orderBookSelector} from "../store/selectors"
-import { fillOrder } from "../store/interactions";
 
 const OrderBook = () => {
 

@@ -1,9 +1,9 @@
-import { useEffect, useState, useRef } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { loadBalances, transferTokens } from "../store/interactions";
+import { useEffect, useState, useRef } from "react"
+import { useDispatch, useSelector } from "react-redux"
+import { loadBalances, transferTokens } from "../store/interactions"
 
-import maintokens from "../assets/maintokens.png";
-import secondarytokens from "../assets/secondarytokens.png";
+import maintokens from "../assets/maintokens.png"
+import secondarytokens from "../assets/secondarytokens.png"
 
 const Balance = () => {
 

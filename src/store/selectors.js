@@ -1,7 +1,7 @@
 import moment from "moment"
-import {ethers} from "ethers";
+import {ethers} from "ethers"
 import {createSelector} from "reselect"
-import {get, groupBy, maxBy, minBy, reject} from "lodash";
+import {get, groupBy, maxBy, minBy, reject} from "lodash"
 
 const GREEN = "#25CE8F"
 const RED = "#F45353"

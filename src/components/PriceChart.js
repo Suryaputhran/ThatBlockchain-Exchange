@@ -1,10 +1,10 @@
-import Banner from "./Banner";
-import Chart from "react-apexcharts";
-import arrowUp from "../assets/up-arrow.png";
-import arrowDown from "../assets/down-arrow.png";
-import {useSelector} from "react-redux";
-import {priceChartSelector} from "../store/selectors";
-import {defaultSeries, options} from "./PriceChart.config";
+import Banner from "./Banner"
+import Chart from "react-apexcharts"
+import {useSelector} from "react-redux"
+import arrowUp from "../assets/up-arrow.png"
+import arrowDown from "../assets/down-arrow.png"
+import {priceChartSelector} from "../store/selectors"
+import {defaultSeries, options} from "./PriceChart.config"
 
 const PriceChart = () => {
 

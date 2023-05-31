@@ -33,3 +33,5 @@ typechain-types
 cache
 artifacts
 
+#Contract Addresses
+src/config.json
