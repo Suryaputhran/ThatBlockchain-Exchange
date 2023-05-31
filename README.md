@@ -1,48 +1,187 @@
-**Decentralized Exchange (Dex)**
 
-This is a decentralized exchange project built on the Ethereum blockchain platform using the Hardhat framework, React, and Redux.
+# ThatBlockchain Exchange
 
-**Getting Started**
+"ThatBlockchain-Exchange" is an open-source decentralized exchange platform that operates on the Ethereum blockchain. The platform offers users the opportunity to trade various cryptocurrencies without relying on centralized intermediaries or authorities.
 
-To get started with this project, follow these steps:
+The project's core objective is to address the challenges associated with centralized exchanges, such as high transaction fees, slow processing times, and security vulnerabilities. By leveraging the benefits of blockchain technology, ThatBlockchain-Exchange allows for faster, more affordable, and secure cryptocurrency trading.
 
-1. Clone the repository: git clone https://github.com/exyreams/Decentralized-Exchange.git
-2. Install the required dependencies by running npm install in the root directory of the project.
-3. Configure your local development environment by setting up your .env file. An example .env.example file is provided.
-4. Deploy the contracts to your local network by running npx hardhat run scripts/deploy.js --network <local-network-name> command in the terminal.
-5. Start the application: npm start
+This project may be of interest to individuals who are passionate about blockchain technology, decentralized finance, and cryptocurrency trading. Additionally, developers looking to contribute to an open-source project and enhance their skills in building decentralized applications could find this project valuable.
 
 
-**Usage**
-  
-Once you have the application running, you can interact with the decentralized exchange through the web interface or by executing trades directly on the Ethereum blockchain.
+## Features
+- Users can trade, fulfill, cancel orders and exchange with various token pairs. 
 
-Contributions are welcome! If you would like to contribute to this project, please submit a pull request or contact the project maintainer.
+- Users can also change the networks like Testnets, Mainet Ethereum.
 
-**License**
- 
-This project is licensed under the MIT License - see the LICENSE.md file for details.
+- **Decentralized:** Because the exchange runs on the Ethereum blockchain, it is not controlled by any central authority or middleman.
 
-**Packages**
-  
-The following packages are used in this project:
+- **Trustless:** Smart contracts ensure that all transactions are carried out automatically and without the need for parties to trust one another.
 
-- @reduxjs/toolkit: This package provides a set of opinionated tools for efficient Redux development. To install, run npm install @reduxjs/toolkit.
-- axios: This is a popular promise-based HTTP client for Node.js and browser. To install, run npm install axios.
-- dotenv: This package loads environment variables from a .env file into process.env. To install, run npm install dotenv.
-- ethereumjs-tx: This package provides a simple way to create, sign, and serialize Ethereum transactions. To install, run npm install ethereumjs-tx.
-- hardhat: This is a development environment for building, testing, and deploying smart contracts on Ethereum. To install, run npm install hardhat.
-- react: This is a JavaScript library for building user interfaces. To install, run npm install react.
-- react-dom: This package provides DOM-specific methods that can be used at the top level of your React application. To install, run npm install react-dom.
-- react-redux: This package provides React bindings for Redux. To install, run npm install react-redux.
-- react-router-dom: This package provides DOM bindings for React Router. To install, run npm install react-router-dom.
-- redux: This is a predictable state container for JavaScript apps. To install, run npm install redux.
-- web3: This is the Ethereum JavaScript API, which allows you to interact with an Ethereum blockchain node using JavaScript. To install, run npm install web3.
+- **User-friendly interface:** The platform is designed to be user-friendly and accessible to anyone, regardless of their technical expertise.
+
+- **Advanced trading features:** The exchange offers a range of advanced trading features, such as stop-loss orders and margin trading.
+
+- **Secure:** The platform uses advanced security measures to protect users' funds from theft and hacking attempts.
+
+- **Low fees:** Users can set their own fees for trading, which helps to reduce costs and increase profitability.
+
+
+## Demo
+
+**NOTE: The Exchange is currently deployed on Sepolia Testnet.It can be deployed on any Networks .i.e Mainets/Testnets.**
+
+Looking for a detailed breakdown of the features offered by the website? You must check out the preview at :
+
+https://thatblockchainexchange.on.fleek.co
+
+It focuses on all of the important features and capabilities.
+## Tech Stack
+
+**Client:** Javascript, React, Redux, HTML, CSS
+
+**Server:** NodeJS, Solidity, Hardhat
+
+
+## Packages
+ **@reduxjs/toolkit:** This package provides a set of opinionated tools for efficient Redux development. To install, run :
+```bash
+  npm install @reduxjs/toolkit
+```
+
+**axios:**  This is a popular promise-based HTTP client for Node.js and browser. To install, run :
+```bash
+  npm install axios
+```
+
+**dotenv:** This package loads environment variables from a .env file into process.env. To install, run :
+```bash
+  npm install dotenv
+```
+
+**ethereumjs-tx:** This package provides a simple way to create, sign, and serialize Ethereum transactions. To install, run :
+```bash
+  npm install ethereumjs-tx
+```
+
+**hardhat:** This is a development environment for building, testing, and deploying smart contracts on Ethereum. To install, run :
+```bash
+  npm install hardhat
+```
+
+**react:** This is a JavaScript library for building user interfaces. To install, run :
+```bash
+  npm install react
+```
+
+**react-dom:** This package provides DOM-specific methods that can be used at the top level of your React application. To install, run :
+```bash
+  npm install react-dom
+```
+
+**react-redux:** This package provides React bindings for Redux. To install, run:
+```bash
+  npm install react-redux
+```
+
+**react-router-dom:** This package provides DOM bindings for React Router. To install, run :
+```bash
+  npm install react-router-dom
+```
+
+**redux:** This is a predictable state container for JavaScript apps. To install, run :
+```bash
+  npm install redux
+```
+
+**web3:** This is the Ethereum JavaScript API, which allows you to interact with an Ethereum blockchain node using JavaScript. To install, run :
+```bash
+  npm install web3
+```
 
 You can install all these packages at once by running npm install.
+## Environment Variables
 
-**Support**
-  
-If you have any questions or encounter any issues with the application, please refer to the documentation in the docs directory or contact the project maintainer.
+To run this project, you will need to add the following environment variables to your .env file
 
-Thank you for your time, and if you have any suggestions on how we can improve this project, please let us know!
+`INFURA_API_KEY="Your Infura API Key"`
+
+`METAMASK_PRIVATE_KEY="Your Private Key, Your Private Key"`
+
+Note: 
+You can get an Infura API key by signing up for a free account at https://infura.io/.
+
+You can get an Metamask wallet by installing Metamask extension on your browser at https://metamask.io/download/.
+## Installation & Deployment
+
+1. Make sure you have Git, Node.js, and npm installed on your computer.
+
+2. Clone the repository by running the following command in your terminal:
+```bash
+  git clone https://github.com/exyreams/ThatBlockchain-Exchange.git
+```
+
+3. Navigate to the directory where you cloned the repository and install the required dependencies by running the following command:
+```bash
+  npm install
+```
+
+4. Run hardhat node using the command given below.
+```bash
+  npx hardhat node
+```
+
+5. After running node in your local host, now deploy the hardhat scripts using the commands as shown below.
+```bash
+  npx hardhat run scripts scripts/1_deploy.js --network localhost
+  npx hardhat run scripts scripts/1_seed_exchange.js --network localhost
+```
+
+6. If you want to use different network replace the name of network like this.
+```bash
+//for sepolia
+npx hardhat run scripts scripts/1_deploy.js --network sepolia
+npx hardhat run scripts scripts/1_seed_exchange.js --network sepolia
+
+//for kovan
+npx hardhat run scripts scripts/1_deploy.js --network kovan
+npx hardhat run scripts scripts/1_seed_exchange.js --network kovan
+
+//for goerli
+npx hardhat run scripts scripts/1_deploy.js --network goerli
+npx hardhat run scripts scripts/1_seed_exchange.js --network goerli
+```
+## License
+[![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](https://choosealicense.com/licenses/mit/)
+
+This project is licensed under the MIT License - see the LICENSE.md file for details.
+
+
+## FAQ
+
+#### What cryptocurrencies can be traded on ThatBlockchain-Exchange?
+
+➝ ThatBlockchain-Exchange supports trading of various tokens on the Ethereum blockchain. Users can trade ERC-20 tokens and Ether (ETH) on the platform.
+
+#### Is ThatBlockchain-Exchange secure?
+
+➝ Yes, ThatBlockchain-Exchange is designed to be highly secure. The platform uses advanced security measures such as two-factor authentication and multi-signature wallets to protect users' funds from theft and hacking attempts.
+
+#### What fees does ThatBlockchain-Exchange charge?
+
+➝ ThatBlockchain-Exchange allows users to set their own fees for trading. This helps to reduce costs and increase profitability for traders. 1% fee is charged for all the transactions.
+
+#### Is ThatBlockchain-Exchange easy to use?
+
+➝ Yes, ThatBlockchain-Exchange was designed to be user-friendly and accessible to anyone, regardless of their technical expertise. The platform features a simple and intuitive interface that makes it easy for anyone to start trading.
+
+#### How does ThatBlockchain-Exchange ensure the execution of trustless transactions?
+
+➝ ThatBlockchain-Exchange uses smart contracts to automate the trading process. These smart contracts are programmed to execute trades automatically when certain conditions are met. By using smart contracts, ThatBlockchain-Exchange eliminates the need for intermediaries or centralized authorities to facilitate trades, ensuring that transactions are executed in a trustless manner.
+
+#### Can users trade on ThatBlockchain-Exchange from anywhere in the world?
+
+➝ Yes, ThatBlockchain-Exchange is a decentralized platform that can be accessed from anywhere in the world, as long as users have an internet connection and access to the Ethereum blockchain.
+
+#### Is ThatBlockchain-Exchange open-source?
+
+➝ Yes, ThatBlockchain-Exchange is an open-source project released under the MIT License. This means that the code is freely available for anyone to use, modify and distribute.
