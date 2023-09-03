@@ -61,7 +61,7 @@ const Navbar = () => {
                         <option value="0x440" disabled>Metis Andromeda</option>
                         <option value="0xa" disabled>Optimism</option>
                         <option value="0x89" disabled>Polygon</option>
-                        <option value="0x13881" disabled>Mumbai</option>
+                        <option value="0x13881" >Mumbai</option>
                         <option value="0x144" disabled>zkSync Era</option>
                     </select>
                 )}
