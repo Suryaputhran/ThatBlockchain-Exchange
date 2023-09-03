@@ -41,9 +41,9 @@ const Navbar = () => {
                             onChange={networkHandler}>
                         <option value="0" disabled>Select Network</option>
                         <option value="0xaa36a7" >Sepolia</option>
-                        <option value="0x7A69" >Localhost</option>
-                        <option value="0x5" >Goerli</option>
-                        <option value="0x61" >Binance SC Testnet</option>
+                        <option value="0x7A69" disabled>Localhost</option>
+                        <option value="0x5" disabled>Goerli</option>
+                        <option value="0x61" disabled>Binance SC Testnet</option>
                         <option value="0x2328" disabled>Evmos Testnet</option>
                         <option value="0xfa2" disabled>Fantom Testnet</option>
                         <option value="0x1252" disabled>IoTeX Testnet</option>
@@ -61,6 +61,7 @@ const Navbar = () => {
                         <option value="0x440" disabled>Metis Andromeda</option>
                         <option value="0xa" disabled>Optimism</option>
                         <option value="0x89" disabled>Polygon</option>
+                        <option value="0x13881" disabled>Mumbai</option>
                         <option value="0x144" disabled>zkSync Era</option>
                     </select>
                 )}
