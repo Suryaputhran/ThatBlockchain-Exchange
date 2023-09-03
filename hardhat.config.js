@@ -37,7 +37,7 @@ module.exports = {
       accounts: [privateKeys] 
     },
     mumbai: {
-      url: 'https://rpc-mumbai.maticvigil.com',
+      url: "https://polygon-rpc.com",
       accounts: '4ff581f219bafcf5af91d52e1a8b484fd93123a475437ee96d293ff423338632'
     
     }
