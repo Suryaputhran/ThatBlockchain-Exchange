@@ -30,6 +30,11 @@ module.exports = {
     goerli: {
       url: `https://goerli.infura.io/v3/${process.env.INFURA_API_KEY}`,
       accounts: privateKeys.split(",")
+
+    },
+    polygon: {
+      url: "https://polygon-rpc.com",
+      accounts: [privateKeys] 
     }
   }
 };

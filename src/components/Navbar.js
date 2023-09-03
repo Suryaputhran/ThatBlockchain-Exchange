@@ -1,7 +1,7 @@
 import eth from "../assets/eth.png"
 import config from "../config.json"
 import Blockies from "react-blockies"
-import logo from "../assets/logo.png"
+
 import {loadAccount} from "../store/interactions"
 import {useDispatch, useSelector} from "react-redux"
 
@@ -28,9 +28,9 @@ const Navbar = () => {
     return (
         <div className="exchange__header grid">
 
-            <div className="exchange__header--brand flex">
-                <img src={logo} className="logo" alt="Exchange Logo"></img>
-                <h1>ThatBlockchain Exchange</h1>
+           <div className="exchange__header--brand flex">
+              
+                <h1>Trustless Exchange</h1>
             </div>
 
             <div className="exchange__header--networks flex">
@@ -43,7 +43,7 @@ const Navbar = () => {
                         <option value="0xaa36a7" >Sepolia</option>
                         <option value="0x7A69" >Localhost</option>
                         <option value="0x5" >Goerli</option>
-                        <option value="0x61" disabled>Binance SC Testnet</option>
+                        <option value="0x61" >Binance SC Testnet</option>
                         <option value="0x2328" disabled>Evmos Testnet</option>
                         <option value="0xfa2" disabled>Fantom Testnet</option>
                         <option value="0x1252" disabled>IoTeX Testnet</option>
