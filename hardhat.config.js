@@ -32,14 +32,16 @@ module.exports = {
       accounts: privateKeys.split(",")
 
     },
-    polygon: {
-      url: "https://polygon-rpc.com",
-      accounts: [privateKeys] 
-    },
+   // polygon: {
+   //   url: "https://polygon-rpc.com",
+   //   accounts: [privateKeys] }, 
+   
     mumbai: {
-      url: "https://polygon-rpc.com",
-      accounts: '4ff581f219bafcf5af91d52e1a8b484fd93123a475437ee96d293ff423338632'
-    
-    }
+      url: 'https://polygon-mumbai.infura.io/v3/864f9e71b0c24c089ff6fc55a56dc033',
+      accounts:[ '4ff581f219bafcf5af91d52e1a8b484fd93123a475437ee96d293ff423338632',
+                '0c1cb4aabe1d70603db34899f1410fa988be0472d711c2315cb110a1ca72a9bb',
+                '0x7c852118294e51e653712a81e05800f419141751be58f605c371e15141b007a6'
+    ] }  
+  
   }
 };
