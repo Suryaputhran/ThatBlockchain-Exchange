@@ -1,47 +1,42 @@
-import {ethers} from "ethers";
+import { ethers } from "ethers";
 
 async function main() {
-    // eslint-disable-next-line no-undef
-    const Token = await ethers.getContractFactory("Token");
-    // eslint-disable-next-line no-undef
-    const DecentralizedExchange = await ethers.getContractFactory("DecentralizedExchange");
+    // Define the network configuration for the Evorich Testnet
+    const evorichTestnet = {
+        url: "https://rpc.dev.chain.metadap.io/",
+        chainId: 119193,
+    };
 
-    //Fetch accounts
-    // eslint-disable-next-line no-undef
-    const accounts = await ethers.getSigners()
-    console.log(`Accounts fetched:\n${accounts[0].address}\n${accounts[1].address}\n`);
+    // Specify the deploying account's private key
+    const deployingAccountPrivateKey = "0c1cb4aabe1d70603db34899f1410fa988be0472d711c2315cb110a1ca72a9bb";
 
-    //deploy contract
-    const Auriga = await Token.deploy("Auriga", "AUG", "18", "100000000");
-    await Auriga.deployed();
-    console.log(`Auriga deployed to: ${Auriga.address}`);
+    // Create a wallet using the private key and connect it to the provider
+    const wallet = new ethers.Wallet(deployingAccountPrivateKey, evorichTestnet);
 
-    const Empyrean = await Token.deploy("Empyrean", "EMP", "18", "100000000");
-    await Empyrean.deployed();
-    console.log(`Empyrean deployed to: ${Empyrean.address}`);
+    // Log the address of the deploying account
+    console.log(`Deploying account address: ${wallet.address}`);
 
-    const Finix = await Token.deploy("Finix", "FNX", "18", "100000000");
-    await Finix.deployed();
-    console.log(`Finix deployed to: ${Finix.address}`);
+    // Deploy contract function
+    async function deployContract(contractName, ...args) {
+        const ContractFactory = await ethers.getContractFactory(contractName);
+        const contract = await ContractFactory.connect(wallet).deploy(...args);
+        await contract.deployed();
+        console.log(`${contractName} deployed to: ${contract.address}`);
+        return contract;
+    }
 
-    const Helix = await Token.deploy("Helix", "HLX", "18", "100000000");
-    await Helix.deployed();
-    console.log(`Helix deployed to: ${Helix.address}`);
+    // Deploy the token contracts on the Evorich Testnet
+    const MetaDAPInternalVND = await deployContract("Token", "MetaDAP Internal VND", "VND", 18, "10110009000000");
+    const Empyrean = await deployContract("Token", "Empyrean", "EMP", 18, "100000000");
+    const Finix = await deployContract("Token", "Finix", "FNX", 18, "100000000");
+    const Helix = await deployContract("Token", "Helix", "HLX", 18, "100000000");
+    const Quantum = await deployContract("Token", "Quantum", "QTM", 18, "100000000");
+    const Sirius = await deployContract("Token", "Sirius", "SRS", 18, "100000000");
+    const Zeroconium = await deployContract("Token", "Zeroconium", "ZRC", 18, "100000000");
 
-    const Quantum = await Token.deploy("Quantum", "QTM", "18", "100000000");
-    await Quantum.deployed();
-    console.log(`Quantum deployed to: ${Quantum.address}`);
+    // Deploy the DecentralizedExchange contract on the Evorich Testnet
+    const decentralizedexchange = await deployContract("DecentralizedExchange", wallet.address, 10);
 
-    const Sirius = await Token.deploy("Sirius", "SRS", "18", "100000000");
-    await Sirius.deployed();
-    console.log(`Sirius deployed to: ${Sirius.address}`);
-
-    const Zeroconium = await Token.deploy("Zeroconium", "ZRC", "18", "100000000");
-    await Zeroconium.deployed();
-    console.log(`Zeroconium deployed to: ${Zeroconium.address}`);
-
-    const decentralizedexchange = await DecentralizedExchange.deploy(accounts[1].address, 10);
-    await decentralizedexchange.deployed();
     console.log(`DecentralizedExchange deployed to: ${decentralizedexchange.address}`);
 }
 
